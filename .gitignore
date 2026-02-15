@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Project specific - Phase 1 (legacy)
+sources/*.pdf
+output/*.md
+output/*.txt
+
+# Phase 2 data artifacts
+data/raw/*.pdf
+data/processed/
+data/chunks/
+data/index/
+
+# Phase 2 logs and eval results
+logs/*.jsonl
+eval/results/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

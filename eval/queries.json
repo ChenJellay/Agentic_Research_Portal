@@ -1,0 +1,137 @@
+{
+  "description": "Evaluation query set for Phase 2 RAG pipeline. 22 queries total: 10 direct, 5 synthesis/multi-hop, 5 ambiguity/edge-case, 2 bonus stress-tests.",
+  "queries": [
+    {
+      "id": "d01",
+      "type": "direct",
+      "query": "What does cyclomatic complexity measure, and what are its known failure modes?",
+      "expected_behaviour": "Answer should define cyclomatic complexity and discuss at least one limitation. Must cite source chunks."
+    },
+    {
+      "id": "d02",
+      "type": "direct",
+      "query": "How do AI code-generation tools affect developer productivity according to the corpus?",
+      "expected_behaviour": "Should reference productivity metrics or studies mentioned in the papers."
+    },
+    {
+      "id": "d03",
+      "type": "direct",
+      "query": "What role does prompt engineering play in AI-augmented software development?",
+      "expected_behaviour": "Describes prompt engineering as a practice in AI-assisted SDLC."
+    },
+    {
+      "id": "d04",
+      "type": "direct",
+      "query": "What are the key phases of the software development lifecycle discussed in the corpus?",
+      "expected_behaviour": "Lists SDLC phases (requirements, design, coding, testing, deployment, maintenance)."
+    },
+    {
+      "id": "d05",
+      "type": "direct",
+      "query": "How does AI-assisted code review differ from traditional code review?",
+      "expected_behaviour": "Contrasts manual vs AI-assisted review processes with source evidence."
+    },
+    {
+      "id": "d06",
+      "type": "direct",
+      "query": "What security concerns are raised about AI-generated code in the literature?",
+      "expected_behaviour": "Discusses vulnerabilities, supply-chain risks, or trust issues."
+    },
+    {
+      "id": "d07",
+      "type": "direct",
+      "query": "What testing strategies are recommended for AI-augmented software projects?",
+      "expected_behaviour": "Covers testing approaches mentioned in papers."
+    },
+    {
+      "id": "d08",
+      "type": "direct",
+      "query": "How is model-driven software engineering defined in the context of AI augmentation?",
+      "expected_behaviour": "Defines MDSE and ties it to AI-assisted workflows."
+    },
+    {
+      "id": "d09",
+      "type": "direct",
+      "query": "What metrics are used to evaluate the quality of AI-generated code?",
+      "expected_behaviour": "Lists quality metrics (correctness, maintainability, test coverage, etc.)."
+    },
+    {
+      "id": "d10",
+      "type": "direct",
+      "query": "What are the main adoption barriers for AI tools in software teams?",
+      "expected_behaviour": "Identifies organizational, technical, or skill barriers."
+    },
+    {
+      "id": "s01",
+      "type": "synthesis",
+      "query": "Compare the perspectives of the ACM 2025 paper and the IJSRA 2024 paper on how AI changes the developer role. Where do they agree and disagree?",
+      "expected_behaviour": "Multi-source comparison citing both acm_2025 and ijsr_2024 chunks."
+    },
+    {
+      "id": "s02",
+      "type": "synthesis",
+      "query": "Across all sources, what is the consensus on whether AI tools improve or degrade code quality?",
+      "expected_behaviour": "Synthesises evidence from multiple papers with balanced assessment."
+    },
+    {
+      "id": "s03",
+      "type": "synthesis",
+      "query": "How do the arXiv paper and the IJNRD paper differ in their recommendations for integrating AI into the SDLC?",
+      "expected_behaviour": "Contrasts arxiv_2409_18048 and ijnrd_2024 recommendations."
+    },
+    {
+      "id": "s04",
+      "type": "synthesis",
+      "query": "What common research gaps are identified across at least two papers in the corpus?",
+      "expected_behaviour": "Identifies shared gaps with cross-source citations."
+    },
+    {
+      "id": "s05",
+      "type": "synthesis",
+      "query": "Synthesise the evidence from the corpus on the impact of AI tools on software testing and QA processes.",
+      "expected_behaviour": "Aggregates testing/QA evidence from multiple sources."
+    },
+    {
+      "id": "e01",
+      "type": "edge_case",
+      "query": "Does the corpus contain evidence that AI coding assistants reduce the need for junior developers?",
+      "expected_behaviour": "If no direct evidence, system should say so explicitly rather than hallucinate."
+    },
+    {
+      "id": "e02",
+      "type": "edge_case",
+      "query": "What does the corpus say about the environmental impact of training AI models for code generation?",
+      "expected_behaviour": "Likely no evidence; system should state 'No sufficient evidence found in the corpus.'"
+    },
+    {
+      "id": "e03",
+      "type": "edge_case",
+      "query": "Are there any contradictions between papers regarding the reliability of AI-generated unit tests?",
+      "expected_behaviour": "Should flag conflicting evidence if present, or say none found."
+    },
+    {
+      "id": "e04",
+      "type": "edge_case",
+      "query": "What specific company case studies on AI-augmented development are described in the corpus?",
+      "expected_behaviour": "Cites only real case studies from chunks, or states absence."
+    },
+    {
+      "id": "e05",
+      "type": "edge_case",
+      "query": "Does any paper in the corpus propose a formal mathematical model for measuring AI tool effectiveness?",
+      "expected_behaviour": "Should cite if present; otherwise explicitly flag absence."
+    },
+    {
+      "id": "x01",
+      "type": "stress_test",
+      "query": "Explain everything the corpus says about AI, software, development, and testing.",
+      "expected_behaviour": "Overly broad query; system should still produce a structured, cited answer without hallucination."
+    },
+    {
+      "id": "x02",
+      "type": "stress_test",
+      "query": "",
+      "expected_behaviour": "Empty query; system should handle gracefully (refuse or ask for clarification)."
+    }
+  ]
+}
