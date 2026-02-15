@@ -39,17 +39,12 @@ output/*.md
 output/*.txt
 
 # Phase 2 data artifacts
-data/raw/*.pdf
 data/processed/
 data/chunks/
 data/index/
 
 # Phase 2 logs and eval results
-logs/*.jsonl
-eval/results/
 
-# Logs
-*.log
 
 # OS
 .DS_Store
