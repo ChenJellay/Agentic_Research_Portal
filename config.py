@@ -28,6 +28,10 @@ class ModelConfig:
 # RAG configuration
 # ---------------------------------------------------------------------------
 
+# Default buffer reserved for system prompt and safety when computing context budget
+RAG_CONTEXT_BUFFER_TOKENS = 2048
+
+
 @dataclass
 class RAGConfig:
     """Configuration for the RAG pipeline."""
@@ -44,10 +48,20 @@ class RAGConfig:
     top_k_final: int = 5           # chunks after RRF fusion
     rrf_k: int = 60                # RRF constant (standard default)
 
+    # Context window (SLM)
+    slm_context_window: int = 32768   # e.g. Qwen2.5-7B-Instruct
+    rag_context_budget_tokens: Optional[int] = None  # if None: window - rag_max_tokens - buffer
+
     # Generation
     rag_max_tokens: int = 2048
     rag_temperature: float = 0.3   # lower for more faithful answers
     prompt_template_version: str = "v1"
+
+    def get_effective_context_budget(self) -> int:
+        """Max tokens for context (chunks + metadata + question). Uses rag_context_budget_tokens if set, else derived from window."""
+        if self.rag_context_budget_tokens is not None:
+            return self.rag_context_budget_tokens
+        return self.slm_context_window - self.rag_max_tokens - RAG_CONTEXT_BUFFER_TOKENS
 
 
 # ---------------------------------------------------------------------------

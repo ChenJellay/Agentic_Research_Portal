@@ -21,6 +21,7 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 from rank_bm25 import BM25Okapi
 
+from chunker import count_tokens
 from config import get_path_config, get_rag_config
 from embedder import embed_query
 from logger_config import setup_logger
@@ -108,7 +109,7 @@ class BM25Index:
 def reciprocal_rank_fusion(
     ranked_lists: List[List[Dict[str, Any]]],
     k: int = 60,
-    top_k: int = 5,
+    top_k: Optional[int] = 5,
 ) -> List[Dict[str, Any]]:
     """
     Merge multiple ranked result lists using RRF.
@@ -119,7 +120,7 @@ def reciprocal_rank_fusion(
     Args:
         ranked_lists: list of ranked result lists (each item has ``chunk_id``).
         k: RRF constant (default 60).
-        top_k: number of final results.
+        top_k: number of final results (None = return all in rank order).
 
     Returns:
         Merged and re-ranked list of chunk dicts with ``rrf_score``.
@@ -134,13 +135,14 @@ def reciprocal_rank_fusion(
             if cid not in items:
                 items[cid] = item
 
-    sorted_ids = sorted(scores, key=lambda cid: scores[cid], reverse=True)[:top_k]
+    sorted_ids = sorted(scores, key=lambda cid: scores[cid], reverse=True)
+    if top_k is not None:
+        sorted_ids = sorted_ids[:top_k]
 
     results: List[Dict[str, Any]] = []
     for cid in sorted_ids:
         entry = dict(items[cid])
         entry["rrf_score"] = scores[cid]
-        # Use RRF score as the canonical score downstream
         entry["score"] = scores[cid]
         results.append(entry)
 
@@ -176,6 +178,7 @@ class HybridRetriever:
         query: str,
         top_k_per: Optional[int] = None,
         top_k_final: Optional[int] = None,
+        context_token_budget: Optional[int] = None,
     ) -> List[Dict[str, Any]]:
         """
         Run hybrid retrieval and return fused results.
@@ -183,7 +186,9 @@ class HybridRetriever:
         Args:
             query: natural-language question.
             top_k_per: candidates from each retriever (default from RAGConfig).
-            top_k_final: final result count after RRF (default from RAGConfig).
+            top_k_final: max chunks after RRF when not using budget (default from RAGConfig).
+            context_token_budget: if set, return chunks in RRF order that fit within
+                this token count (using chunk token_count or count_tokens(text)).
 
         Returns:
             List of chunk dicts sorted by RRF score.
@@ -201,14 +206,37 @@ class HybridRetriever:
         bm25_results = self.bm25_index.search(query, top_k=top_k_per)
         logger.debug(f"BM25 retrieval returned {len(bm25_results)} result(s)")
 
-        # Fuse
+        # Fuse: if budget given, get more candidates then trim to budget
+        fuse_top_k = None if context_token_budget else top_k_final
+        if context_token_budget is not None:
+            # Get enough candidates to fill budget (e.g. 2x top_k_final)
+            fuse_top_k = max(top_k_final * 2, 20)
         fused = reciprocal_rank_fusion(
             [dense_results, bm25_results],
             k=cfg.rrf_k,
-            top_k=top_k_final,
+            top_k=fuse_top_k or top_k_final,
         )
-        logger.info(
-            f"Hybrid retrieval for '{query[:60]}…': "
-            f"{len(dense_results)} dense + {len(bm25_results)} BM25 → {len(fused)} fused"
-        )
+
+        if context_token_budget is not None:
+            used = 0
+            result: List[Dict[str, Any]] = []
+            for chunk in fused:
+                tok = chunk.get("token_count")
+                if tok is None:
+                    tok = count_tokens(chunk.get("text", ""))
+                if used + tok > context_token_budget:
+                    break
+                used += tok
+                result.append(chunk)
+            fused = result
+            logger.info(
+                f"Hybrid retrieval for '{query[:60]}…': "
+                f"{len(dense_results)} dense + {len(bm25_results)} BM25 → "
+                f"{len(fused)} chunks ({used} tokens within budget {context_token_budget})"
+            )
+        else:
+            logger.info(
+                f"Hybrid retrieval for '{query[:60]}…': "
+                f"{len(dense_results)} dense + {len(bm25_results)} BM25 → {len(fused)} fused"
+            )
         return fused

@@ -90,12 +90,16 @@ class RAGQueryEngine:
             return ("Please provide a non-empty question.", [])
 
         rag_cfg = get_rag_config()
+        context_budget = rag_cfg.get_effective_context_budget()
 
-        # 1. Retrieve
-        retrieved = self.retriever.retrieve(question)
+        # 1. Retrieve (fill to context budget when set)
+        retrieved = self.retriever.retrieve(
+            question,
+            context_token_budget=context_budget,
+        )
         logger.info(f"Retrieved {len(retrieved)} chunks for query")
 
-        # 2. Build prompt
+        # 2. Build prompt (respect context budget; truncate chunks if needed)
         source_ids_in_context = {c["source_id"] for c in retrieved}
         source_meta = {}
         for sid in source_ids_in_context:
@@ -103,7 +107,12 @@ class RAGQueryEngine:
             if entry:
                 source_meta[sid] = entry
 
-        prompt = build_rag_prompt(question, retrieved, source_meta)
+        prompt = build_rag_prompt(
+            question,
+            retrieved,
+            source_meta,
+            context_token_budget=context_budget,
+        )
         logger.debug(f"Prompt length: {len(prompt)} chars")
 
         # 3. Generate

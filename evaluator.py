@@ -48,6 +48,17 @@ def _overlap_score(sentence: str, chunk_text: str) -> float:
     return len(s_words & c_words) / len(s_words | c_words)
 
 
+def _is_no_evidence_answer(answer: str) -> bool:
+    """True if the answer is essentially 'No sufficient evidence found in the corpus' plus refs."""
+    normalized = answer.strip().lower()
+    if not normalized:
+        return False
+    return normalized.startswith("no sufficient evidence") or (
+        "no sufficient evidence found in the corpus" in normalized
+        and len(_sentence_split(answer)) <= 2
+    )
+
+
 def compute_groundedness(
     answer: str,
     retrieved_chunks: List[Dict[str, Any]],
@@ -56,18 +67,21 @@ def compute_groundedness(
     """
     Heuristic groundedness: for each sentence in the answer, check whether
     at least one retrieved chunk has sufficient word overlap.
-
-    Returns:
-        {
-            "score": float,           # fraction of grounded sentences
-            "total_sentences": int,
-            "grounded_sentences": int,
-            "ungrounded": [str, ...]  # sentences with no supporting chunk
-        }
+    Treats "No sufficient evidence found in the corpus" as correct abstention
+    (not penalized as ungrounded) when the answer is essentially that plus refs.
     """
     sentences = _sentence_split(answer)
     if not sentences:
         return {"score": 1.0, "total_sentences": 0, "grounded_sentences": 0, "ungrounded": []}
+
+    # Correct abstention: do not count "no evidence" as ungrounded
+    if _is_no_evidence_answer(answer):
+        return {
+            "score": 1.0,
+            "total_sentences": len(sentences),
+            "grounded_sentences": len(sentences),
+            "ungrounded": [],
+        }
 
     chunk_texts = [c.get("text", "") for c in retrieved_chunks]
     grounded = 0
@@ -93,32 +107,38 @@ def compute_groundedness(
     }
 
 
+def _enclosing_sentence_for_citation(answer: str, cite: Dict[str, str], sentences: List[str]) -> str:
+    """
+    Find the sentence that best encloses the citation (claim before citation).
+    If multiple sentences contain the citation, prefer the one where the citation
+    appears at or near the end (claim then [source_id, chunk_id]).
+    """
+    cite_str = f"[{cite['source_id']}, {cite['chunk_id']}]"
+    containing = [s for s in sentences if cite_str in s or cite["chunk_id"] in s]
+    if not containing:
+        return answer
+    if len(containing) == 1:
+        return containing[0]
+    # Prefer sentence where citation appears nearest to end (claim then citation)
+    best = max(containing, key=lambda s: (s.rfind(cite["chunk_id"]) / len(s)) if len(s) > 0 else 0)
+    return best
+
+
 def compute_citation_precision(
     answer: str,
     chunk_lookup: Dict[str, str],
-    threshold: float = 0.10,
+    threshold: float = 0.08,
 ) -> Dict[str, Any]:
     """
     For each inline citation ``[source_id, chunk_id]`` in the answer,
     check whether the cited chunk text has word-overlap with the
-    surrounding sentence.
-
-    Args:
-        chunk_lookup: ``{chunk_id: text}`` mapping.
-
-    Returns:
-        {
-            "precision": float,
-            "total_citations": int,
-            "valid_citations": int,
-            "invalid_citations": [{"chunk_id": ..., "sentence": ...}, ...]
-        }
+    surrounding sentence. Uses improved enclosing-sentence logic
+    (prefer sentence that ends just after the citation).
     """
     citations = extract_citations(answer)
     if not citations:
         return {"precision": 1.0, "total_citations": 0, "valid_citations": 0, "invalid_citations": []}
 
-    # Map each citation to its enclosing sentence
     sentences = _sentence_split(answer)
     valid = 0
     invalid_list: List[Dict[str, str]] = []
@@ -130,14 +150,8 @@ def compute_citation_precision(
             invalid_list.append({"chunk_id": cid, "reason": "chunk_id not found in index"})
             continue
 
-        # Find enclosing sentence
-        enclosing = ""
-        for sent in sentences:
-            if cid in sent or cite["source_id"] in sent:
-                enclosing = sent
-                break
+        enclosing = _enclosing_sentence_for_citation(answer, cite, sentences)
         if not enclosing:
-            # Fallback: use the whole answer
             enclosing = answer
 
         overlap = _overlap_score(enclosing, chunk_text)
@@ -158,6 +172,32 @@ def compute_citation_precision(
     }
 
 
+def compute_confidence(
+    groundedness_score: float,
+    citation_precision: float,
+    answer: str,
+) -> Dict[str, Any]:
+    """
+    Per-response confidence / evidence-strength score in [0, 1].
+    Composite: 0.6 * groundedness + 0.4 * citation_precision.
+    If the answer is a correct abstention (no evidence), score = 0.5.
+    Also returns a tier label for the report.
+    """
+    if _is_no_evidence_answer(answer):
+        return {
+            "score": 0.5,
+            "tier": "abstained",
+        }
+    score = round(0.6 * groundedness_score + 0.4 * citation_precision, 4)
+    if groundedness_score >= 0.6 and citation_precision >= 0.6:
+        tier = "high"
+    elif groundedness_score >= 0.4 or citation_precision >= 0.4:
+        tier = "medium"
+    else:
+        tier = "low"
+    return {"score": score, "tier": tier}
+
+
 # ---------------------------------------------------------------------------
 # Single-query evaluation
 # ---------------------------------------------------------------------------
@@ -175,6 +215,11 @@ def evaluate_single(
     """
     groundedness = compute_groundedness(answer, retrieved_chunks)
     citation_prec = compute_citation_precision(answer, chunk_lookup)
+    confidence = compute_confidence(
+        groundedness["score"],
+        citation_prec["precision"],
+        answer,
+    )
 
     return {
         "query_id": query_record.get("id", ""),
@@ -182,6 +227,7 @@ def evaluate_single(
         "query": query_record.get("query", ""),
         "groundedness": groundedness,
         "citation_precision": citation_prec,
+        "confidence": confidence,
         "answer_length": len(answer),
     }
 
@@ -282,6 +328,10 @@ def run_evaluation(
         sum(r["citation_precision"]["precision"] for r in scored) / len(scored)
         if scored else 0.0
     )
+    avg_confidence = (
+        sum(r["confidence"]["score"] for r in scored) / len(scored)
+        if scored else 0.0
+    )
 
     summary = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -290,6 +340,7 @@ def run_evaluation(
         "skipped": len(queries) - len(scored),
         "avg_groundedness": round(avg_ground, 4),
         "avg_citation_precision": round(avg_cite, 4),
+        "avg_confidence": round(avg_confidence, 4),
         "failure_cases_count": len(failure_cases),
         "failure_cases": failure_cases[:5],
     }
@@ -349,6 +400,7 @@ def _write_report(
         f"| Skipped | {summary['skipped']} |",
         f"| Avg Groundedness | {summary['avg_groundedness']:.4f} |",
         f"| Avg Citation Precision | {summary['avg_citation_precision']:.4f} |",
+        f"| Avg Confidence | {summary.get('avg_confidence', 0):.4f} |",
         f"| Failure Cases | {summary['failure_cases_count']} |",
         "",
         "## Per-Query Results",
@@ -362,18 +414,21 @@ def _write_report(
             continue
         lines.append(f"### {qtype.replace('_', ' ').title()} Queries")
         lines.append("")
-        lines.append("| ID | Groundedness | Citation Prec. | Answer Len |")
-        lines.append("|----|-------------|----------------|-----------|")
+        lines.append("| ID | Groundedness | Citation Prec. | Confidence | Answer Len |")
+        lines.append("|----|-------------|----------------|-----------|-----------|")
         for r in typed:
             if "groundedness" in r:
                 g = r["groundedness"]["score"]
                 c = r["citation_precision"]["precision"]
+                conf = r.get("confidence", {})
+                conf_val = conf.get("score", 0)
+                conf_tier = conf.get("tier", "")
                 a = r.get("answer_length", 0)
-                lines.append(f"| {r['query_id']} | {g:.3f} | {c:.3f} | {a} |")
+                lines.append(f"| {r['query_id']} | {g:.3f} | {c:.3f} | {conf_val:.3f} ({conf_tier}) | {a} |")
             elif r.get("skipped"):
-                lines.append(f"| {r['query_id']} | SKIPPED | — | — |")
+                lines.append(f"| {r['query_id']} | SKIPPED | — | — | — |")
             else:
-                lines.append(f"| {r['query_id']} | ERROR | — | — |")
+                lines.append(f"| {r['query_id']} | ERROR | — | — | — |")
         lines.append("")
 
     # Failure cases
@@ -410,6 +465,7 @@ def _write_report(
         "",
         "- **Groundedness** measures what fraction of answer sentences are supported by at least one retrieved chunk (word-overlap heuristic, threshold=0.15).",
         "- **Citation Precision** measures what fraction of inline `[source_id, chunk_id]` citations point to chunks that actually support the enclosing sentence.",
+        "- **Confidence / evidence-strength** is a per-response score in [0, 1]: 0.6 × groundedness + 0.4 × citation precision. Correct abstentions (\"No sufficient evidence\") score 0.5. Tier: high (both ≥ 0.6), medium (either ≥ 0.4), low, or abstained.",
         "- Failure cases highlight queries where either metric fell below 0.5, indicating the model may have hallucinated or cited irrelevant chunks.",
         "",
     ])

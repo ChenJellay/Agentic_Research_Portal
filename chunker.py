@@ -44,6 +44,25 @@ def _count_tokens(text: str) -> int:
     return len(_get_encoder().encode(text))
 
 
+def count_tokens(text: str) -> int:
+    """
+    Count tokens in text (cl100k_base). Use for RAG context budgeting and prompt construction.
+    Shared with chunker so token counts are consistent across ingest and query time.
+    """
+    return _count_tokens(text)
+
+
+def truncate_to_tokens(text: str, max_tokens: int) -> str:
+    """Return the prefix of text that fits within max_tokens (trimmed from end)."""
+    if max_tokens <= 0:
+        return ""
+    enc = _get_encoder()
+    tokens = enc.encode(text)
+    if len(tokens) <= max_tokens:
+        return text
+    return enc.decode(tokens[:max_tokens])
+
+
 def _make_chunk_id(source_id: str, idx: int) -> str:
     """Deterministic chunk ID: source_id + sequential index."""
     return f"{source_id}_chunk_{idx:04d}"
