@@ -73,6 +73,66 @@ AI_Research/
 - macOS with Apple Silicon (MLX requirement)
 - ~5 GB disk for model + dependencies
 
+## Running with MLX and Qwen (for third-party users)
+
+The portal uses **MLX** (Apple’s machine learning framework) and **mlx-lm** to run a Qwen model locally for answer generation. If you’re trying this repo for the first time, follow these steps.
+
+### 1. Install MLX and mlx-lm
+
+MLX runs only on **macOS with Apple Silicon** (M1/M2/M3/M4). Install the Python packages:
+
+```bash
+pip install mlx mlx-lm
+# or use the project’s full deps:
+pip install -r requirements.txt
+```
+
+### 2. Choose a Qwen model
+
+The default model is **Qwen2.5-7B-Instruct-4bit** from the MLX community:
+
+- **Model ID**: `mlx-community/Qwen2.5-7B-Instruct-4bit`
+- **Download**: About 4–5 GB; it is downloaded automatically the first time you run a query.
+
+To use a different Qwen (or other compatible) model, set it in `config.py`:
+
+```python
+# In config.py, inside the Config class or ModelConfig:
+MODEL_CONFIG = ModelConfig(
+    model_name="mlx-community/Qwen2.5-7B-Instruct-4bit",  # default
+    # Examples of alternatives:
+    # model_name="mlx-community/Qwen2.5-3B-Instruct-4bit",   # smaller, faster
+    # model_name="mlx-community/Qwen2.5-14B-Instruct-4bit-Q4", # larger
+    model_path=None,  # or a local path like "/path/to/mlx_model"
+    max_tokens=2048,
+    temperature=0.7,
+    top_p=0.9,
+)
+```
+
+For RAG queries the pipeline uses lower temperature (0.3) for more faithful answers; the above is the general default.
+
+### 3. First run: model download
+
+On the first `query` or `evaluate` run, mlx-lm will download the model from Hugging Face into the MLX cache (usually `~/.cache/huggingface/hub/` or the path set by `HF_HOME`). No extra download script is needed.
+
+```bash
+# This will download the model on first run, then run a query
+python rag_pipeline.py query "How does AI affect code review?"
+```
+
+### 4. Gated or private models
+
+If you use a gated Hugging Face model (or a private repo), log in first:
+
+```bash
+pip install huggingface_hub
+huggingface-cli login
+# Enter your HF token when prompted.
+```
+
+You can instead set the token in the environment: `export HF_TOKEN=your_token_here`.
+
 ## Quick Start
 
 ```bash
