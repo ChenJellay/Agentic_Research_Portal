@@ -1,0 +1,697 @@
+{
+  "summary": {
+    "timestamp": "2026-02-16T01:49:45.637157+00:00",
+    "total_queries": 22,
+    "evaluated": 21,
+    "skipped": 1,
+    "avg_groundedness": 0.6349,
+    "avg_citation_precision": 0.6865,
+    "avg_confidence": 0.4365,
+    "failure_cases_count": 11,
+    "failure_cases": [
+      {
+        "query_id": "d02",
+        "query": "How do AI code-generation tools affect developer productivity according to the corpus?",
+        "groundedness_score": 0.6154,
+        "citation_precision": 0.3333,
+        "ungrounded_samples": [
+          "These tools automate repetitive tasks, such as debugging, code refactoring, and security vulnerability detection, allowing developers to focus more on problem-solving and innovation [ijnrd_2024, ijnrd_2024_chunk_0016].",
+          "## References\n- IJNRD Author(s)."
+        ],
+        "answer_snippet": "AI code-generation tools significantly reduce development time and improve software quality by generating contextually relevant code snippets, thereby enhancing developer productivity [ijnrd_2024, ijnrd_2024_chunk_0087]. These tools automate repetitive tasks, such as debugging, code refactoring, and"
+      },
+      {
+        "query_id": "d06",
+        "query": "What security concerns are raised about AI-generated code in the literature?",
+        "groundedness_score": 0.0,
+        "citation_precision": 0.3333,
+        "ungrounded_samples": [
+          "Security concerns about AI-generated code include the potential for generating insecure or vulnerable code [arxiv_2502_08108_chunk_0015], recommending weak encryption algorithms [ijnrd_2024_chunk_0074], and introducing security flaws due to insecure code suggestions [ijnrd_2024_chunk_0069].",
+          "Additionally, there is a risk of exposure to AI-generated malware [ijnrd_2024_chunk_0069], and the variability in AI outputs can lead to security vulnerabilities over time [arxiv_2502_08108_chunk_0015]."
+        ],
+        "answer_snippet": "Security concerns about AI-generated code include the potential for generating insecure or vulnerable code [arxiv_2502_08108_chunk_0015], recommending weak encryption algorithms [ijnrd_2024_chunk_0074], and introducing security flaws due to insecure code suggestions [ijnrd_2024_chunk_0069]. Addition"
+      },
+      {
+        "query_id": "d08",
+        "query": "How is model-driven software engineering defined in the context of AI augmentation?",
+        "groundedness_score": 0.0,
+        "citation_precision": 1.0,
+        "ungrounded_samples": [
+          "Model-driven software engineering (MDSE) is defined as a practice where models are original artifacts that are engineered with the intention of facilitating the top-down construction of complex software.",
+          "Models are used during runtime to enable monitoring, verification, and validation of software operations, as well as the optimization of its performance."
+        ],
+        "answer_snippet": "Model-driven software engineering (MDSE) is defined as a practice where models are original artifacts that are engineered with the intention of facilitating the top-down construction of complex software. Models are used during runtime to enable monitoring, verification, and validation of software op"
+      },
+      {
+        "query_id": "d09",
+        "query": "What metrics are used to evaluate the quality of AI-generated code?",
+        "groundedness_score": 1.0,
+        "citation_precision": 0.0,
+        "ungrounded_samples": [],
+        "answer_snippet": "No sufficient evidence found in the corpus.\n\n## References\n- IJNRD Author(s), 2024. AI-Augmented Software Development: Enhancing Code Quality and Developer Productivity. International Journal of Novel Research and Development. https://www.ijnrd.org/ [ijnrd_2024, ijnrd_2024_chunk_0041]\n- IJSRA Author"
+      },
+      {
+        "query_id": "d10",
+        "query": "What are the main adoption barriers for AI tools in software teams?",
+        "groundedness_score": 0.4444,
+        "citation_precision": 0.0,
+        "ungrounded_samples": [
+          "Additionally, there is a concern that overreliance on AI tools may lead to a degradation of fundamental coding skills among developers, reducing their ability to critically analyze and solve problems.",
+          "This can result in a lack of critical thinking and an increased risk of errors in the codebase."
+        ],
+        "answer_snippet": "The main adoption barriers for AI tools in software teams include reliance on AI technology, ethical and security issues, technological lapses, and the proliferation of errors. Additionally, there is a concern that overreliance on AI tools may lead to a degradation of fundamental coding skills among"
+      }
+    ]
+  },
+  "per_query": [
+    {
+      "query_id": "d01",
+      "query_type": "direct",
+      "query": "What does cyclomatic complexity measure, and what are its known failure modes?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 1,
+        "grounded_sentences": 1,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 43
+    },
+    {
+      "query_id": "d02",
+      "query_type": "direct",
+      "query": "How do AI code-generation tools affect developer productivity according to the corpus?",
+      "groundedness": {
+        "score": 0.6154,
+        "total_sentences": 13,
+        "grounded_sentences": 8,
+        "ungrounded": [
+          "These tools automate repetitive tasks, such as debugging, code refactoring, and security vulnerability detection, allowing developers to focus more on problem-solving and innovation [ijnrd_2024, ijnrd_2024_chunk_0016].",
+          "## References\n- IJNRD Author(s).",
+          "*International Journal of Novel Research and Development*.",
+          "https://www.ijnrd.org/\n- Treude, C., & Gerosa, M.",
+          "How Developers Interact with AI: A Taxonomy of Human-AI Collaboration in Software Engineering."
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.3333,
+        "total_citations": 3,
+        "valid_citations": 1,
+        "invalid_citations": [
+          {
+            "chunk_id": "ijnrd_2024_chunk_0087",
+            "reason": "low overlap (0.079) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijnrd_2024_chunk_0016",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.5026,
+        "tier": "medium"
+      },
+      "answer_length": 1015
+    },
+    {
+      "query_id": "d03",
+      "query_type": "direct",
+      "query": "What role does prompt engineering play in AI-augmented software development?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 1,
+        "grounded_sentences": 1,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 43
+    },
+    {
+      "query_id": "d04",
+      "query_type": "direct",
+      "query": "What are the key phases of the software development lifecycle discussed in the corpus?",
+      "groundedness": {
+        "score": 0.6087,
+        "total_sentences": 23,
+        "grounded_sentences": 14,
+        "ungrounded": [
+          "The key phases of the software development lifecycle discussed in the corpus include:\n\n- Requirements analysis (arxiv_2106_09323_chunk_0026, arxiv_2106_09323_chunk_0071, arxiv_2106_09323_chunk_0055, arxiv_2106_09323_chunk_0062)\n- Design (arxiv_2106_09323_chunk_0026, arxiv_2106_09323_chunk_0071, arxiv_2106_09323_chunk_0055, arxiv_2106_09323_chunk_0062)\n- Implementation (arxiv_2106_09323_chunk_0026, arxiv_2106_09323_chunk_0071, arxiv_2106_09323_chunk_0055, arxiv_2106_09323_chunk_0062)\n- Testing (arxiv_2106_09323_chunk_0026, arxiv_2106_09323_chunk_0071, arxiv_2106_09323_chunk_0055, arxiv_2106_09323_chunk_0062)\n- Maintenance (arxiv_2106_09323_chunk_0026, arxiv_2106_09323_chunk_0071, arxiv_2106_09323_chunk_0055, arxiv_2106_09323_chunk_0062)\n\nAdditionally, the corpus mentions specific phases for quantum software development lifecycle, such as:\n\n- Quantum software requirements analysis (arxiv_2106_09323_chunk_0071)\n- Quantum software design (arxiv_2106_09323_chunk_0071)\n- Quantum software implementation (arxiv_2106_09323_chunk_0071)\n- Quantum software testing (arxiv_2106_09323_chunk_0071)\n- Quantum software maintenance (arxiv_2106_09323_chunk_0071)\n\n## References\n- arxiv_2106_09323: Quantum Software Development Lifecycle (Benjamin Weder, Johanna Barzen, Frank Leymann, Daniel Vietz, 2021).",
+          "https://arxiv.org/abs/2106.09323\n- arxiv_2409_18048: Augmenting Software Engineering with AI and Developing It Further Towards AI-Assisted Model-Driven Software Engineering (arXiv Author(s), 2024).",
+          "International Journal of Science and Research Archive.",
+          "https://dl.acm.org/\n- arxiv_2501_02842: Foundations of GenIR (Qingyao Ai, Jingtao Zhan, Yiqun Liu, 2025).",
+          "https://arxiv.org/abs/2501.02842\n- arxiv_2405_01543: Transforming Software Development with Generative AI: Empirical Insights on Collaboration and Workflow (Rasmus Ulfsnes, Nils Brede Moe, Viktoria Stray, Marianne Skarpen, 2024)."
+        ]
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.7652,
+        "tier": "high"
+      },
+      "answer_length": 2993
+    },
+    {
+      "query_id": "d05",
+      "query_type": "direct",
+      "query": "How does AI-assisted code review differ from traditional code review?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 2,
+        "grounded_sentences": 2,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 334
+    },
+    {
+      "query_id": "d06",
+      "query_type": "direct",
+      "query": "What security concerns are raised about AI-generated code in the literature?",
+      "groundedness": {
+        "score": 0.0,
+        "total_sentences": 3,
+        "grounded_sentences": 0,
+        "ungrounded": [
+          "Security concerns about AI-generated code include the potential for generating insecure or vulnerable code [arxiv_2502_08108_chunk_0015], recommending weak encryption algorithms [ijnrd_2024_chunk_0074], and introducing security flaws due to insecure code suggestions [ijnrd_2024_chunk_0069].",
+          "Additionally, there is a risk of exposure to AI-generated malware [ijnrd_2024_chunk_0069], and the variability in AI outputs can lead to security vulnerabilities over time [arxiv_2502_08108_chunk_0015].",
+          "## References\n- [arxiv_2502_08108, arxiv_2502_08108_chunk_0015]\n- [ijnrd_2024, ijnrd_2024_chunk_0074]\n- [ijnrd_2024, ijnrd_2024_chunk_0069]"
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.3333,
+        "total_citations": 3,
+        "valid_citations": 1,
+        "invalid_citations": [
+          {
+            "chunk_id": "arxiv_2502_08108_chunk_0015",
+            "reason": "low overlap (0.050) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijnrd_2024_chunk_0069",
+            "reason": "low overlap (0.057) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.1333,
+        "tier": "low"
+      },
+      "answer_length": 635
+    },
+    {
+      "query_id": "d07",
+      "query_type": "direct",
+      "query": "What testing strategies are recommended for AI-augmented software projects?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 1,
+        "grounded_sentences": 1,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 43
+    },
+    {
+      "query_id": "d08",
+      "query_type": "direct",
+      "query": "How is model-driven software engineering defined in the context of AI augmentation?",
+      "groundedness": {
+        "score": 0.0,
+        "total_sentences": 5,
+        "grounded_sentences": 0,
+        "ungrounded": [
+          "Model-driven software engineering (MDSE) is defined as a practice where models are original artifacts that are engineered with the intention of facilitating the top-down construction of complex software.",
+          "Models are used during runtime to enable monitoring, verification, and validation of software operations, as well as the optimization of its performance.",
+          "The core idea behind using models in software engineering is to exploit their abstraction and comprehensibility.",
+          "However, practical limitations include issues with the integration of generated and hand-written code, modularity of the generated code, and the organization of the development process [source_id=arxiv_2409_18048, arxiv_2409_18048_chunk_0006].",
+          "## References\n- [arxiv_2409_18048, arxiv_2409_18048_chunk_0006]"
+        ]
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 2,
+        "valid_citations": 2,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.4,
+        "tier": "medium"
+      },
+      "answer_length": 779
+    },
+    {
+      "query_id": "d09",
+      "query_type": "direct",
+      "query": "What metrics are used to evaluate the quality of AI-generated code?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 26,
+        "grounded_sentences": 26,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 0.0,
+        "total_citations": 8,
+        "valid_citations": 0,
+        "invalid_citations": [
+          {
+            "chunk_id": "ijnrd_2024_chunk_0041",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijsr_2024_chunk_0005",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          },
+          {
+            "chunk_id": "arxiv_2409_18048_chunk_0028",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          },
+          {
+            "chunk_id": "arxiv_2401_15284_chunk_0025",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          },
+          {
+            "chunk_id": "arxiv_2502_08108_chunk_0016",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 1815
+    },
+    {
+      "query_id": "d10",
+      "query_type": "direct",
+      "query": "What are the main adoption barriers for AI tools in software teams?",
+      "groundedness": {
+        "score": 0.4444,
+        "total_sentences": 9,
+        "grounded_sentences": 4,
+        "ungrounded": [
+          "Additionally, there is a concern that overreliance on AI tools may lead to a degradation of fundamental coding skills among developers, reducing their ability to critically analyze and solve problems.",
+          "This can result in a lack of critical thinking and an increased risk of errors in the codebase.",
+          "International Journal of Science and Research Archive.",
+          "https://ijsra.net/\n- Christoph Treude, Margaret-Anne Storey.",
+          "Generative AI and Empirical Software Engineering: A Paradigm Shift (2025)."
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.0,
+        "total_citations": 2,
+        "valid_citations": 0,
+        "invalid_citations": [
+          {
+            "chunk_id": "ijsr_2024_chunk_0015",
+            "reason": "low overlap (0.021) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijsr_2024_chunk_0016",
+            "reason": "low overlap (0.017) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.2666,
+        "tier": "medium"
+      },
+      "answer_length": 901
+    },
+    {
+      "query_id": "s01",
+      "query_type": "synthesis",
+      "query": "Compare the perspectives of the ACM 2025 paper and the IJSRA 2024 paper on how AI changes the developer role. Where do they agree and disagree?",
+      "groundedness": {
+        "score": 0.3333,
+        "total_sentences": 15,
+        "grounded_sentences": 5,
+        "ungrounded": [
+          "The ACM 2025 paper and the IJSRA 2024 paper both discuss how AI changes the developer role, but they present different perspectives.",
+          "The ACM 2025 paper [acm_2025, acm_2025_chunk_0001] suggests that AI is reshaping the role of humans within the software ecosystem by rendering some technologies and approaches obsolete, overturning common practices, and changing workflows.",
+          "It emphasizes that human factors have yet to be incorporated into AI-driven software engineering (SE) and could be considered a new dimension.",
+          "It also mentions that challenges such as code reliability, security risks, and overreliance on AI-generated solutions must be addressed.",
+          "The ACM 2025 paper agrees with the IJSRA 2024 paper in recognizing the positive impact of AI on code quality and productivity, but it also points out that AI is leading to the obsolescence of certain human roles and practices, which the IJSRA 2024 paper does not explicitly address."
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.5,
+        "total_citations": 2,
+        "valid_citations": 1,
+        "invalid_citations": [
+          {
+            "chunk_id": "ijsr_2024_chunk_0002",
+            "reason": "low overlap (0.060) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.4,
+        "tier": "medium"
+      },
+      "answer_length": 1804
+    },
+    {
+      "query_id": "s02",
+      "query_type": "synthesis",
+      "query": "Across all sources, what is the consensus on whether AI tools improve or degrade code quality?",
+      "groundedness": {
+        "score": 0.2,
+        "total_sentences": 15,
+        "grounded_sentences": 3,
+        "ungrounded": [
+          "The consensus across the sources is that AI tools improve code quality.",
+          "[ijsr_2024, ijsr_2024_chunk_0005] highlights that AI can help avoid routine work and mistakes, leading to fewer bugs and faster review cycles.",
+          "[ijsr_2024, ijsr_2024_chunk_0006] emphasizes that AI enhances code maintainability by ensuring coding standards are followed, generating documentation, and performing predictive maintenance and refactoring.",
+          "[ijnrd_2024, ijsr_2024_chunk_0044] mentions that AI can improve code quality by identifying and fixing code smells, optimizing code, and eradicating bugs early in the development process.",
+          "[arxiv_2303_13936, arxiv_2303_13936_chunk_0007] also supports that AI can assist in generating code and improving development efficiency."
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.0,
+        "total_citations": 5,
+        "valid_citations": 0,
+        "invalid_citations": [
+          {
+            "chunk_id": "ijsr_2024_chunk_0005",
+            "reason": "low overlap (0.055) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijsr_2024_chunk_0006",
+            "reason": "low overlap (0.045) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijsr_2024_chunk_0044",
+            "reason": "chunk_id not found in index"
+          },
+          {
+            "chunk_id": "arxiv_2303_13936_chunk_0007",
+            "reason": "low overlap (0.028) with enclosing sentence"
+          },
+          {
+            "chunk_id": "ijsr_2024_chunk_0015",
+            "reason": "low overlap (0.056) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.12,
+        "tier": "low"
+      },
+      "answer_length": 1686
+    },
+    {
+      "query_id": "s03",
+      "query_type": "synthesis",
+      "query": "How do the arXiv paper and the IJNRD paper differ in their recommendations for integrating AI into the SDLC?",
+      "groundedness": {
+        "score": 0.4286,
+        "total_sentences": 14,
+        "grounded_sentences": 6,
+        "ungrounded": [
+          "It also addresses challenges such as code reliability, security risks, ethical considerations, and overreliance on AI-generated solutions.",
+          "The paper suggests a balanced approach where AI serves as an augmentation tool rather than a replacement for human expertise.",
+          "The arXiv paper also discusses the integration of AI into SE to make the field more accessible and to free developers to focus on higher-level design and problem-solving.",
+          "## References\n- IJNRD: IJNRD Author(s), 2024.",
+          "AI-Augmented Software Development: Enhancing Code Quality and Developer Productivity."
+        ]
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 2,
+        "valid_citations": 2,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.6572,
+        "tier": "medium"
+      },
+      "answer_length": 1676
+    },
+    {
+      "query_id": "s04",
+      "query_type": "synthesis",
+      "query": "What common research gaps are identified across at least two papers in the corpus?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 1,
+        "grounded_sentences": 1,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 43
+    },
+    {
+      "query_id": "s05",
+      "query_type": "synthesis",
+      "query": "Synthesise the evidence from the corpus on the impact of AI tools on software testing and QA processes.",
+      "groundedness": {
+        "score": 0.2778,
+        "total_sentences": 18,
+        "grounded_sentences": 5,
+        "ungrounded": [
+          "AI tools can significantly impact software testing and QA processes by automating various testing activities.",
+          "Additionally, AI can help in predicting the likelihood of deployment failures and improve fault detection performance by analyzing source code changes and quality metrics (Tatineni, 2024) [arxiv_2502_08108_chunk_0012, arxiv_2502_08108_chunk_0012].",
+          "Furthermore, AI can enhance the efficiency and maintainability of software development by automating repetitive tasks and improving code quality through continuous monitoring and predictions (IJSRA Author(s), 2024) [ijsr_2024_chunk_0013, ijsr_2024_chunk_0013].",
+          "However, the reliance on AI-generated data also introduces challenges.",
+          "Researchers must ensure transparency, reproducibility, and human oversight in AI-mediated workflows to maintain research validity and avoid over-reliance on AI, as highlighted by the recommendations for empirical software engineering research (arxiv_2502_08108_chunk_0016, arxiv_2502_08108_chunk_0016) [arxiv_2502_08108_chunk_0016, arxiv_2502_08108_chunk_0016]."
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.25,
+        "total_citations": 4,
+        "valid_citations": 1,
+        "invalid_citations": [
+          {
+            "chunk_id": "arxiv_2502_08108_chunk_0012",
+            "reason": "low overlap (0.031) with enclosing sentence"
+          },
+          {
+            "chunk_id": "arxiv_2502_08108_chunk_0012",
+            "reason": "low overlap (0.031) with enclosing sentence"
+          },
+          {
+            "chunk_id": "arxiv_2502_08108_chunk_0016",
+            "reason": "low overlap (0.075) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.2667,
+        "tier": "low"
+      },
+      "answer_length": 1936
+    },
+    {
+      "query_id": "e01",
+      "query_type": "edge_case",
+      "query": "Does the corpus contain evidence that AI coding assistants reduce the need for junior developers?",
+      "groundedness": {
+        "score": 0.0,
+        "total_sentences": 5,
+        "grounded_sentences": 0,
+        "ungrounded": [
+          "Yes, the corpus contains evidence that AI coding assistants can reduce the need for junior developers to perform certain coding tasks.",
+          "For instance, [arxiv_2303_13936_chunk_0023] mentions that AI tools can help junior developers by generating code and documentation, which allows them to focus on learning the fundamentals of programming rather than writing code.",
+          "Additionally, [arxiv_2303_13936_chunk_0015] notes that AI can assist in generating code, which can be used as a starting point by junior developers.",
+          "However, it also emphasizes the importance of junior developers understanding the quality of the code generated by AI, as they need to judge whether the code is correct, efficient, and of high quality.",
+          "## References\n- [arxiv_2303_13936, arxiv_2303_13936_chunk_0023]\n- [arxiv_2303_13936, arxiv_2303_13936_chunk_0015]"
+        ]
+      },
+      "citation_precision": {
+        "precision": 0.0,
+        "total_citations": 2,
+        "valid_citations": 0,
+        "invalid_citations": [
+          {
+            "chunk_id": "arxiv_2303_13936_chunk_0023",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          },
+          {
+            "chunk_id": "arxiv_2303_13936_chunk_0015",
+            "reason": "low overlap (0.000) with enclosing sentence"
+          }
+        ]
+      },
+      "confidence": {
+        "score": 0.0,
+        "tier": "low"
+      },
+      "answer_length": 829
+    },
+    {
+      "query_id": "e02",
+      "query_type": "edge_case",
+      "query": "What does the corpus say about the environmental impact of training AI models for code generation?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 2,
+        "grounded_sentences": 2,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 202
+    },
+    {
+      "query_id": "e03",
+      "query_type": "edge_case",
+      "query": "Are there any contradictions between papers regarding the reliability of AI-generated unit tests?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 2,
+        "grounded_sentences": 2,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 156
+    },
+    {
+      "query_id": "e04",
+      "query_type": "edge_case",
+      "query": "What specific company case studies on AI-augmented development are described in the corpus?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 1,
+        "grounded_sentences": 1,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 43
+    },
+    {
+      "query_id": "e05",
+      "query_type": "edge_case",
+      "query": "Does any paper in the corpus propose a formal mathematical model for measuring AI tool effectiveness?",
+      "groundedness": {
+        "score": 1.0,
+        "total_sentences": 1,
+        "grounded_sentences": 1,
+        "ungrounded": []
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.5,
+        "tier": "abstained"
+      },
+      "answer_length": 43
+    },
+    {
+      "query_id": "x01",
+      "query_type": "stress_test",
+      "query": "Explain everything the corpus says about AI, software, development, and testing.",
+      "groundedness": {
+        "score": 0.425,
+        "total_sentences": 40,
+        "grounded_sentences": 17,
+        "ungrounded": [
+          "The corpus provides extensive information about AI, software development, and testing.",
+          "Here are the key points:\n\n1.",
+          "Examples include DeepCode, Ponicode, and Microsoft IntelliCode (ijnrd_2024_chunk_0051).",
+          "- AI can be used to generate boilerplate code, assist in testing, and even simulate virtual environments for learning and testing (arxiv_2405_01543_chunk_0012, arxiv_2405_01543_chunk_0010).",
+          "**Testing and Code Review**:\n   - Peer code review is a standard practice in software engineering but is less prevalent in research software."
+        ]
+      },
+      "citation_precision": {
+        "precision": 1.0,
+        "total_citations": 0,
+        "valid_citations": 0,
+        "invalid_citations": []
+      },
+      "confidence": {
+        "score": 0.655,
+        "tier": "medium"
+      },
+      "answer_length": 3596
+    },
+    {
+      "query_id": "x02",
+      "query_type": "stress_test",
+      "query": "",
+      "skipped": true,
+      "reason": "empty query"
+    }
+  ]
+}
