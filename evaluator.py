@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from config import get_path_config, get_rag_config
 from logger_config import setup_logger
-from rag_prompts import extract_citations
+from rag_prompts import extract_citations, extract_citations_with_positions
 
 logger = setup_logger(__name__)
 
@@ -107,9 +107,6 @@ def compute_groundedness(
     }
 
 
-_CITATION_PATTERN = re.compile(r"\[([^,\]]+),\s*([^\]]+)\]")
-
-
 def _find_enclosing_sentence(answer: str, cite_start: int, cite_end: int) -> str:
     """
     Find the sentence that contains the citation at [cite_start, cite_end].
@@ -164,11 +161,12 @@ def compute_citation_precision(
     invalid_list: List[Dict[str, Any]] = []
     total = 0
 
-    for m in _CITATION_PATTERN.finditer(answer):
+    for cite in extract_citations_with_positions(answer):
         total += 1
-        source_id = m.group(1).strip()
-        cid = m.group(2).strip()
-        cite_start, cite_end = m.span()
+        source_id = cite["source_id"]
+        cid = cite["chunk_id"]
+        cite_start = cite["start"]
+        cite_end = cite["end"]
 
         chunk_text = chunk_lookup.get(cid, "")
         if not chunk_text:
@@ -348,6 +346,9 @@ def run_evaluation(
 
     # Aggregate
     scored = [r for r in per_query_results if "groundedness" in r]
+    abstained = [r for r in scored if r.get("confidence_tier") == "abstained"]
+    answered = [r for r in scored if r.get("confidence_tier") != "abstained"]
+
     avg_ground = (
         sum(r["groundedness"]["score"] for r in scored) / len(scored)
         if scored else 0.0
@@ -360,15 +361,28 @@ def run_evaluation(
         sum(r["confidence"] for r in scored) / len(scored)
         if scored else 0.0
     )
+    avg_ground_answered = (
+        sum(r["groundedness"]["score"] for r in answered) / len(answered)
+        if answered else 0.0
+    )
+    avg_cite_answered = (
+        sum(r["citation_precision"]["precision"] for r in answered) / len(answered)
+        if answered else 0.0
+    )
+    abstention_rate = len(abstained) / len(scored) if scored else 0.0
 
     summary = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "total_queries": len(queries),
         "evaluated": len(scored),
         "skipped": len(queries) - len(scored),
+        "abstained_count": len(abstained),
+        "abstention_rate": round(abstention_rate, 4),
         "avg_groundedness": round(avg_ground, 4),
         "avg_citation_precision": round(avg_cite, 4),
         "avg_confidence": round(avg_confidence, 4),
+        "avg_groundedness_answered_only": round(avg_ground_answered, 4),
+        "avg_citation_precision_answered_only": round(avg_cite_answered, 4),
         "failure_cases_count": len(failure_cases),
         "failure_cases": failure_cases[:5],
     }
@@ -429,6 +443,9 @@ def _write_report(
         f"| Avg Groundedness | {summary['avg_groundedness']:.4f} |",
         f"| Avg Citation Precision | {summary['avg_citation_precision']:.4f} |",
         f"| Avg Confidence | {summary.get('avg_confidence', 0):.4f} |",
+        f"| Abstention Rate | {summary.get('abstention_rate', 0):.1%} |",
+        f"| Avg Groundedness (answered only) | {summary.get('avg_groundedness_answered_only', 0):.4f} |",
+        f"| Avg Citation Prec. (answered only) | {summary.get('avg_citation_precision_answered_only', 0):.4f} |",
         f"| Failure Cases | {summary['failure_cases_count']} |",
         "",
         "## Per-Query Results",
@@ -493,6 +510,7 @@ def _write_report(
         "- **Groundedness** measures what fraction of answer sentences are supported by at least one retrieved chunk (word-overlap heuristic, threshold=0.12). The \"No sufficient evidence\" sentence is treated as correct abstention.",
         "- **Citation Precision** measures what fraction of inline `[source_id, chunk_id]` citations point to chunks that actually support the enclosing sentence (threshold=0.08).",
         "- **Confidence / evidence-strength** is a composite: 0.6×groundedness + 0.4×citation_precision. Tier: high (both ≥0.6), medium (either ≥0.4), low (otherwise). Answers that abstain with \"No sufficient evidence\" receive 0.5 (correctly abstained).",
+        "- **Abstention rate** is the fraction of queries where the model said \"No sufficient evidence\". **Answered-only** metrics exclude abstentions to show quality of substantive answers.",
         "- Failure cases highlight queries where either groundedness or citation precision fell below 0.5.",
         "",
     ])

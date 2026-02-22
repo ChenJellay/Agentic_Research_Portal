@@ -153,6 +153,15 @@ class RAGQueryEngine:
 # Subcommand handlers
 # ---------------------------------------------------------------------------
 
+def cmd_sync(args: argparse.Namespace) -> None:
+    """Handle the ``sync`` subcommand — sync manifest to data/raw contents."""
+    from sync_manifest import sync_manifest_from_raw
+    result = sync_manifest_from_raw()
+    print(f"\nManifest synced: {result['kept']} sources kept, {result['removed']} removed.")
+    print(f"Updated: {result['manifest_path']}")
+    print("Run: python rag_pipeline.py ingest --force")
+
+
 def cmd_ingest(args: argparse.Namespace) -> None:
     """Handle the ``ingest`` subcommand."""
     logger.info("Starting ingestion pipeline…")
@@ -214,8 +223,10 @@ def cmd_evaluate(args: argparse.Namespace) -> None:
     print("\nEvaluation Summary:")
     print(f"  Total queries:           {summary['total_queries']}")
     print(f"  Evaluated:               {summary['evaluated']}")
+    print(f"  Abstention rate:         {summary.get('abstention_rate', 0):.1%}")
     print(f"  Avg Groundedness:        {summary['avg_groundedness']:.4f}")
     print(f"  Avg Citation Precision:  {summary['avg_citation_precision']:.4f}")
+    print(f"  Avg (answered only):     G={summary.get('avg_groundedness_answered_only', 0):.3f} C={summary.get('avg_citation_precision_answered_only', 0):.3f}")
     print(f"  Avg Confidence:          {summary.get('avg_confidence', 0):.4f}")
     print(f"  Failure cases:           {summary['failure_cases_count']}")
     print(f"\nDetailed results saved to: {get_path_config().eval_results_dir}")
@@ -299,6 +310,12 @@ examples:
 
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
+    # --- sync ---
+    p_sync = subparsers.add_parser(
+        "sync",
+        help="Sync manifest to data/raw (keep only sources with PDFs present)",
+    )
+
     # --- ingest ---
     p_ingest = subparsers.add_parser("ingest", help="Ingest corpus: parse, chunk, embed, index")
     p_ingest.add_argument("--force", action="store_true", help="Re-process all sources")
@@ -358,6 +375,7 @@ examples:
         sys.exit(1)
 
     handlers = {
+        "sync": cmd_sync,
         "ingest": cmd_ingest,
         "query": cmd_query,
         "evaluate": cmd_evaluate,

@@ -143,6 +143,9 @@ make install
 # 2. (Optional) Acquire additional sources from arXiv / Semantic Scholar
 make acquire
 
+# 2b. (Optional) After curating data/raw, sync manifest and re-ingest
+#     python rag_pipeline.py sync && python rag_pipeline.py ingest --force
+
 # 3. Ingest corpus (parse → chunk → embed → index)
 make ingest
 
@@ -161,6 +164,7 @@ make run-all
 | Command | Description |
 |---------|-------------|
 | `make test` | Run Phase 3 test suite (24 tests) |
+| `python rag_pipeline.py sync` | Sync manifest to `data/raw` (keep only PDFs present) |
 | `python rag_pipeline.py ingest` | Parse, chunk, embed, and index the corpus |
 | `python rag_pipeline.py ingest --force` | Re-process all sources from scratch |
 | `python rag_pipeline.py query "your question"` | Single RAG query with cited answer |

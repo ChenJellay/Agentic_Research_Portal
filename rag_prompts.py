@@ -31,19 +31,22 @@ RULES — follow these strictly:
 1. Use ONLY information present in the context chunks below to answer.
 2. Make only claims that are directly supported by a specific chunk. If you \
 cannot support a claim with a specific chunk, do not make that claim.
-3. Place each citation immediately after the claim it supports — one sentence, \
-one citation when possible. Use the format [source_id, chunk_id] \
-(e.g., [arxiv_2409_18048, arxiv_2409_18048_chunk_0003]). Do NOT use generic \
-phrases like "according to the corpus" without a specific [source_id, chunk_id].
-4. If the context chunks do NOT contain enough evidence to answer the \
+3. **Citation format**: Use exactly [source_id, chunk_id] with a comma and space \
+between them. Examples: [arxiv_2409_18048, arxiv_2409_18048_chunk_0003], \
+[ijnrd_2024, ijnrd_2024_chunk_0043]. Do NOT use variants like [source_id=X, \
+chunk_id=Y] or (source_id, chunk_id) or bare chunk_ids without source_id.
+4. Place each citation immediately after the claim it supports — one sentence, \
+one citation when possible. Do NOT use generic phrases like "according to the \
+corpus" without a specific [source_id, chunk_id].
+5. If the context chunks do NOT contain enough evidence to answer the \
 question, say: "No sufficient evidence found in the corpus." Then add \
 a line: "Suggested next steps: [query1], [query2]" with 1–2 alternative \
 search queries the user could try to find relevant evidence.
-5. If sources present conflicting evidence, explicitly flag the conflict \
+6. If sources present conflicting evidence, explicitly flag the conflict \
 and cite both sides.
-6. Do NOT invent or hallucinate citations. Every cited chunk_id must come \
+7. Do NOT invent or hallucinate citations. Every cited chunk_id must come \
 from the context below.
-7. End your answer with a "## References" section listing every source you \
+8. End your answer with a "## References" section listing every source you \
 cited, using the metadata provided."""
 
 
@@ -175,22 +178,91 @@ def build_rag_prompt(
 
 import re
 
+# Standard: [source_id, chunk_id]
 _CITATION_RE = re.compile(r"\[([^,\]]+),\s*([^\]]+)\]")
+
+# Variant: [source_id=X, chunk_id=Y] or [source_id = X, chunk_id = Y]
+_CITATION_VARIANT_RE = re.compile(
+    r"\[?\s*source_id\s*=\s*([^,\]]+)\s*,\s*chunk_id\s*=\s*([^\]]+)\s*\]?",
+    re.IGNORECASE
+)
+
+# Variant: (source_id, chunk_id) in References
+_CITATION_PAREN_RE = re.compile(r"\(\s*([^,\s]+)\s*,\s*([^)\s]+)\s*\)")
 
 
 def extract_citations(text: str) -> List[Dict[str, str]]:
     """
-    Extract inline citations of the form ``[source_id, chunk_id]``.
+    Extract inline citations from multiple formats; normalize to standard
+    ``[source_id, chunk_id]`` semantics.
+
+    Supported formats:
+      - [source_id, chunk_id] (standard)
+      - [source_id=X, chunk_id=Y]
+      - (source_id, chunk_id) in References or inline
 
     Returns a list of ``{"source_id": ..., "chunk_id": ...}`` dicts.
+    Deduplicates by (source_id, chunk_id).
     """
+    seen: set = set()
     citations: List[Dict[str, str]] = []
-    for match in _CITATION_RE.finditer(text):
-        citations.append({
-            "source_id": match.group(1).strip(),
-            "chunk_id": match.group(2).strip(),
-        })
+
+    def add(sid: str, cid: str) -> None:
+        sid, cid = sid.strip(), cid.strip()
+        if not sid or not cid:
+            return
+        if "=" in sid or "=" in cid:
+            return  # Variant format parsed by standard regex; skip
+        key = (sid, cid)
+        if key not in seen:
+            seen.add(key)
+            citations.append({"source_id": sid, "chunk_id": cid})
+
+    for m in _CITATION_VARIANT_RE.finditer(text):
+        add(m.group(1), m.group(2))
+    for m in _CITATION_RE.finditer(text):
+        add(m.group(1), m.group(2))
+    for m in _CITATION_PAREN_RE.finditer(text):
+        sid, cid = m.group(1), m.group(2)
+        # Only add if it looks like source_id_chunk_XXXX (chunk_id pattern)
+        if "_chunk_" in cid or (sid.startswith("arxiv_") or sid.startswith("acm_") or sid.startswith("ijnrd_") or sid.startswith("ijsr_")):
+            add(sid, cid)
+
     return citations
+
+
+def extract_citations_with_positions(text: str) -> List[Dict[str, Any]]:
+    """
+    Extract citations with character positions for evaluation.
+
+    Returns list of {"source_id": ..., "chunk_id": ..., "start": int, "end": int}.
+    Used by evaluator for enclosing-sentence logic.
+    """
+    result: List[Dict[str, Any]] = []
+    seen: set = set()
+
+    def add(sid: str, cid: str, start: int, end: int) -> None:
+        sid, cid = sid.strip(), cid.strip()
+        if not sid or not cid:
+            return
+        key = (sid, cid, start)
+        if key not in seen:
+            seen.add(key)
+            result.append({"source_id": sid, "chunk_id": cid, "start": start, "end": end})
+
+    for m in _CITATION_VARIANT_RE.finditer(text):
+        add(m.group(1), m.group(2), m.start(), m.end())
+    for m in _CITATION_RE.finditer(text):
+        sid, cid = m.group(1).strip(), m.group(2).strip()
+        if "=" in sid or "=" in cid:
+            continue
+        add(sid, cid, m.start(), m.end())
+    for m in _CITATION_PAREN_RE.finditer(text):
+        sid, cid = m.group(1), m.group(2)
+        if "_chunk_" in cid or any(sid.startswith(p) for p in ("arxiv_", "acm_", "ijnrd_", "ijsr_")):
+            add(sid, cid, m.start(), m.end())
+
+    return result
 
 
 def validate_citations(
