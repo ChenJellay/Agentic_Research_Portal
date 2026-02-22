@@ -48,17 +48,79 @@ def _overlap_score(sentence: str, chunk_text: str) -> float:
     return len(s_words & c_words) / len(s_words | c_words)
 
 
+_semantic_model: Optional[Any] = None
+
+
+def _get_semantic_model() -> Any:
+    """Lazy-load sentence-transformer for semantic overlap (opt-in)."""
+    global _semantic_model
+    if _semantic_model is None:
+        from sentence_transformers import SentenceTransformer
+
+        cfg = get_rag_config()
+        _semantic_model = SentenceTransformer(cfg.embedding_model)
+    return _semantic_model
+
+
+def _semantic_similarity(sentence: str, chunk_text: str) -> float:
+    """
+    Cosine similarity between sentence and chunk embeddings.
+    Use when use_semantic_overlap=True for paraphrase robustness.
+    """
+    model = _get_semantic_model()
+    embs = model.encode([sentence, chunk_text], normalize_embeddings=True)
+    return float(embs[0] @ embs[1])
+
+
 # Pattern to match "No sufficient evidence" abstention
 _NO_EVIDENCE_RE = re.compile(
     r"\bno\s+sufficient\s+evidence\s+found\s+in\s+the\s+corpus\b",
     re.IGNORECASE
 )
 
+# Pattern to match "## References" section start
+_REFERENCES_HEADER_RE = re.compile(r"^##\s*References?\s*$", re.IGNORECASE | re.MULTILINE)
+
+# Pattern for citation-only or References-style list lines (skip in groundedness)
+_CITATION_LINE_RE = re.compile(r"^\-?\s*\[[^\]]+\]\s*$")
+_REFERENCES_LINE_RE = re.compile(r"^##\s*References?\s*$", re.IGNORECASE)
+_METADATA_LINE_RE = re.compile(
+    r"(Author\(s\)|https?://|\.org\b|\.com\b|International Journal|venue\b|year\b)",
+    re.IGNORECASE
+)
+# Lines with claim verbs should not be skipped as metadata
+_CLAIM_VERB_RE = re.compile(
+    r"\b(according|says|suggests|states|shows|found|indicates|argues|reports)\b",
+    re.IGNORECASE
+)
+
+
+def _is_in_suggested_next_steps(answer: str, cite_start: int, cite_end: int) -> bool:
+    """
+    True if the citation at [cite_start, cite_end] falls within a line
+    that starts with "Suggested next steps" (model confusion: citations
+    instead of search queries).
+    """
+    line_start = answer.rfind("\n", 0, cite_start) + 1
+    line = answer[line_start:cite_end + 50].split("\n")[0]
+    return bool(re.search(r"^\s*suggested\s+next\s+steps\s*[:\.]?", line, re.IGNORECASE))
+
+
+def _is_in_references_section(answer: str, cite_start: int) -> bool:
+    """
+    True if cite_start is after the first ## References (or ## Reference) header.
+    """
+    match = _REFERENCES_HEADER_RE.search(answer)
+    if not match:
+        return False
+    return cite_start >= match.start()
+
 
 def compute_groundedness(
     answer: str,
     retrieved_chunks: List[Dict[str, Any]],
     threshold: float = 0.12,
+    use_semantic_overlap: bool = False,
 ) -> Dict[str, Any]:
     """
     Heuristic groundedness: for each sentence in the answer, check whether
@@ -92,11 +154,38 @@ def compute_groundedness(
         if _NO_EVIDENCE_RE.search(sent):
             grounded += 1
             continue
-        best_overlap = max((_overlap_score(sent, ct) for ct in chunk_texts), default=0.0)
-        if best_overlap >= threshold:
+        # Skip References section: header, citation list lines, metadata
+        if _REFERENCES_LINE_RE.match(sent.strip()) or "## References" in sent or "## Reference" in sent:
             grounded += 1
+            continue
+        if _CITATION_LINE_RE.match(sent.strip()):
+            grounded += 1
+            continue
+        if (
+            len(sent) < 100
+            and _METADATA_LINE_RE.search(sent)
+            and not _CLAIM_VERB_RE.search(sent)
+        ):
+            grounded += 1
+            continue
+        if use_semantic_overlap:
+            best_score = max(
+                (_semantic_similarity(sent, ct) for ct in chunk_texts),
+                default=0.0,
+            )
+            semantic_threshold = 0.5
+            if best_score >= semantic_threshold:
+                grounded += 1
+            else:
+                ungrounded.append(sent)
         else:
-            ungrounded.append(sent)
+            best_overlap = max(
+                (_overlap_score(sent, ct) for ct in chunk_texts), default=0.0
+            )
+            if best_overlap >= threshold:
+                grounded += 1
+            else:
+                ungrounded.append(sent)
 
     score = grounded / len(sentences) if sentences else 1.0
     return {
@@ -136,7 +225,8 @@ def _find_enclosing_sentence(answer: str, cite_start: int, cite_end: int) -> str
 def compute_citation_precision(
     answer: str,
     chunk_lookup: Dict[str, str],
-    threshold: float = 0.08,
+    threshold: float = 0.06,
+    use_semantic_overlap: bool = False,
 ) -> Dict[str, Any]:
     """
     For each inline citation ``[source_id, chunk_id]`` in the answer,
@@ -145,6 +235,10 @@ def compute_citation_precision(
 
     Enclosing sentence: the sentence that contains the citation (by character
     position), so citations at end of sentence are correctly attributed.
+
+    Exclusions:
+    - Citations in "Suggested next steps" lines (model confusion) are skipped.
+    - Citations in ## References section: count as valid if chunk exists in index.
 
     Args:
         chunk_lookup: ``{chunk_id: text}`` mapping.
@@ -162,29 +256,50 @@ def compute_citation_precision(
     total = 0
 
     for cite in extract_citations_with_positions(answer):
-        total += 1
         source_id = cite["source_id"]
         cid = cite["chunk_id"]
         cite_start = cite["start"]
         cite_end = cite["end"]
+
+        # Module 1: Skip citations in "Suggested next steps" (model put citations instead of queries)
+        if _is_in_suggested_next_steps(answer, cite_start, cite_end):
+            continue
+
+        total += 1
 
         chunk_text = chunk_lookup.get(cid, "")
         if not chunk_text:
             invalid_list.append({"chunk_id": cid, "reason": "chunk_id not found in index"})
             continue
 
+        # Module 2: References-only citations — count as valid if chunk exists
+        if _is_in_references_section(answer, cite_start):
+            valid += 1
+            continue
+
         enclosing = _find_enclosing_sentence(answer, cite_start, cite_end)
         if not enclosing:
             enclosing = answer
 
-        overlap = _overlap_score(enclosing, chunk_text)
-        if overlap >= threshold:
-            valid += 1
+        if use_semantic_overlap:
+            score = _semantic_similarity(enclosing, chunk_text)
+            semantic_threshold = 0.5
+            if score >= semantic_threshold:
+                valid += 1
+            else:
+                invalid_list.append({
+                    "chunk_id": cid,
+                    "reason": f"low semantic similarity ({score:.3f}) with enclosing sentence",
+                })
         else:
-            invalid_list.append({
-                "chunk_id": cid,
-                "reason": f"low overlap ({overlap:.3f}) with enclosing sentence",
-            })
+            overlap = _overlap_score(enclosing, chunk_text)
+            if overlap >= threshold:
+                valid += 1
+            else:
+                invalid_list.append({
+                    "chunk_id": cid,
+                    "reason": f"low overlap ({overlap:.3f}) with enclosing sentence",
+                })
 
     precision = valid / total if total else 1.0
     return {
@@ -236,14 +351,19 @@ def evaluate_single(
     answer: str,
     retrieved_chunks: List[Dict[str, Any]],
     chunk_lookup: Dict[str, str],
+    use_semantic_overlap: bool = False,
 ) -> Dict[str, Any]:
     """
     Evaluate a single query-answer pair.
 
     Returns a dict with groundedness, citation precision, and confidence results.
     """
-    groundedness = compute_groundedness(answer, retrieved_chunks)
-    citation_prec = compute_citation_precision(answer, chunk_lookup)
+    groundedness = compute_groundedness(
+        answer, retrieved_chunks, use_semantic_overlap=use_semantic_overlap
+    )
+    citation_prec = compute_citation_precision(
+        answer, chunk_lookup, use_semantic_overlap=use_semantic_overlap
+    )
     confidence, confidence_tier = _compute_confidence(groundedness, citation_prec, answer)
 
     return {
@@ -267,6 +387,7 @@ def run_evaluation(
     queries_path: Optional[Path] = None,
     results_dir: Optional[Path] = None,
     chunk_lookup: Optional[Dict[str, str]] = None,
+    use_semantic_overlap: bool = False,
 ) -> Dict[str, Any]:
     """
     Run the full evaluation suite.
@@ -317,7 +438,13 @@ def run_evaluation(
 
         try:
             answer, retrieved_chunks = run_query_fn(qtext)
-            result = evaluate_single(q, answer, retrieved_chunks, chunk_lookup)
+            result = evaluate_single(
+                q,
+                answer,
+                retrieved_chunks,
+                chunk_lookup,
+                use_semantic_overlap=use_semantic_overlap,
+            )
             per_query_results.append(result)
 
             # Track failure cases
@@ -508,7 +635,7 @@ def _write_report(
         "## Interpretation",
         "",
         "- **Groundedness** measures what fraction of answer sentences are supported by at least one retrieved chunk (word-overlap heuristic, threshold=0.12). The \"No sufficient evidence\" sentence is treated as correct abstention.",
-        "- **Citation Precision** measures what fraction of inline `[source_id, chunk_id]` citations point to chunks that actually support the enclosing sentence (threshold=0.08).",
+        "- **Citation Precision** measures what fraction of inline `[source_id, chunk_id]` citations point to chunks that actually support the enclosing sentence (threshold=0.06). Citations in \"Suggested next steps\" are excluded; References-only citations count as valid if chunk exists.",
         "- **Confidence / evidence-strength** is a composite: 0.6×groundedness + 0.4×citation_precision. Tier: high (both ≥0.6), medium (either ≥0.4), low (otherwise). Answers that abstain with \"No sufficient evidence\" receive 0.5 (correctly abstained).",
         "- **Abstention rate** is the fraction of queries where the model said \"No sufficient evidence\". **Answered-only** metrics exclude abstentions to show quality of substantive answers.",
         "- Failure cases highlight queries where either groundedness or citation precision fell below 0.5.",

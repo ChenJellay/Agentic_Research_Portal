@@ -284,7 +284,7 @@ def acquire_sources(
         if pdf_path is None:
             continue
 
-        # Build manifest entry
+        # Build manifest entry (Appendix A3 schema: raw_path, processed_path)
         source_id = pdf_path.stem  # e.g. arxiv_2409_18048
         entry = {
             "source_id": source_id,
@@ -298,6 +298,10 @@ def acquire_sources(
             "relevance_note": paper.get("summary", "")[:200],
             "filename": pdf_path.name,
             "acquisition_method": "automated",
+            "raw_path": f"data/raw/{pdf_path.name}",
+            "processed_path": f"data/processed/{source_id}.json",
+            "url_or_doi": paper.get("doi") or paper["link"],
+            "tags": "",
         }
 
         try:

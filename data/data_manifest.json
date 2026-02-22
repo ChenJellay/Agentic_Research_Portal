@@ -13,7 +13,11 @@
       "doi": null,
       "relevance_note": "Surveys AI integration across SDLC phases, identifies open challenges for AI-augmented teams.",
       "filename": "acm_2025.pdf",
-      "acquisition_method": "manual"
+      "acquisition_method": "manual",
+      "raw_path": "data/raw/acm_2025.pdf",
+      "processed_path": "data/processed/acm_2025.json",
+      "url_or_doi": "https://dl.acm.org/",
+      "tags": ""
     },
     {
       "source_id": "ijsr_2024",
@@ -28,7 +32,11 @@
       "doi": null,
       "relevance_note": "Examines generative-AI adoption patterns and productivity metrics in SDLC.",
       "filename": "ijsr_2024.pdf",
-      "acquisition_method": "manual"
+      "acquisition_method": "manual",
+      "raw_path": "data/raw/ijsr_2024.pdf",
+      "processed_path": "data/processed/ijsr_2024.json",
+      "url_or_doi": "https://ijsra.net/",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2409_18048",
@@ -43,7 +51,11 @@
       "doi": "10.48550/arXiv.2409.18048",
       "relevance_note": "Proposes an AI-assisted model-driven SE approach with concrete tooling recommendations.",
       "filename": "arxiv_2409_18048.pdf",
-      "acquisition_method": "manual"
+      "acquisition_method": "manual",
+      "raw_path": "data/raw/arxiv_2409_18048.pdf",
+      "processed_path": "data/processed/arxiv_2409_18048.json",
+      "url_or_doi": "10.48550/arXiv.2409.18048",
+      "tags": ""
     },
     {
       "source_id": "ijnrd_2024",
@@ -58,7 +70,11 @@
       "doi": null,
       "relevance_note": "Measures code quality and developer productivity improvements through AI augmentation.",
       "filename": "ijnrd_2024.pd.pdf",
-      "acquisition_method": "manual"
+      "acquisition_method": "manual",
+      "raw_path": "data/raw/ijnrd_2024.pd.pdf",
+      "processed_path": "data/processed/ijnrd_2024.json",
+      "url_or_doi": "https://www.ijnrd.org/",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2106_09323",
@@ -76,7 +92,11 @@
       "doi": null,
       "relevance_note": "With recent advances in the development of more powerful quantum computers, the research area of quantum software engineering is emerging, having the goal to provide concepts, principles, and guidelin",
       "filename": "arxiv_2106_09323.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2106_09323.pdf",
+      "processed_path": "data/processed/arxiv_2106_09323.json",
+      "url_or_doi": "https://arxiv.org/abs/2106.09323",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2405_01543",
@@ -94,7 +114,11 @@
       "doi": null,
       "relevance_note": "Generative AI (GenAI) has fundamentally changed how knowledge workers, such as software developers, solve tasks and collaborate to build software products. Introducing innovative tools like ChatGPT an",
       "filename": "arxiv_2405_01543.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2405_01543.pdf",
+      "processed_path": "data/processed/arxiv_2405_01543.json",
+      "url_or_doi": "https://arxiv.org/abs/2405.01543",
+      "tags": ""
     },
     {
       "source_id": "arxiv_1509_02293",
@@ -110,7 +134,11 @@
       "doi": null,
       "relevance_note": "In model-driven development (MDD) software emerges by systematically transforming abstract models to concrete source code. Ideally, performing those transformations is to a large extent the task of co",
       "filename": "arxiv_1509_02293.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_1509_02293.pdf",
+      "processed_path": "data/processed/arxiv_1509_02293.json",
+      "url_or_doi": "https://arxiv.org/abs/1509.02293",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2501_08774",
@@ -126,7 +154,11 @@
       "doi": null,
       "relevance_note": "Artificial intelligence (AI), including large language models and generative AI, is emerging as a significant force in software development, offering developers powerful tools that span the entire dev",
       "filename": "arxiv_2501_08774.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2501_08774.pdf",
+      "processed_path": "data/processed/arxiv_2501_08774.json",
+      "url_or_doi": "https://arxiv.org/abs/2501.08774",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2303_13936",
@@ -142,7 +174,11 @@
       "doi": null,
       "relevance_note": "The software development industry is amid another disruptive paradigm change - adopting the use of generative AI (GAI) assistants for programming. Whilst AI is already used in various areas of softwar",
       "filename": "arxiv_2303_13936.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2303_13936.pdf",
+      "processed_path": "data/processed/arxiv_2303_13936.json",
+      "url_or_doi": "https://arxiv.org/abs/2303.13936",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2109_10971",
@@ -158,7 +194,11 @@
       "doi": null,
       "relevance_note": "Background: Research software is software developed by and/or used by researchers, across a wide variety of domains, to perform their research. Because of the complexity of research software, develope",
       "filename": "arxiv_2109_10971.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2109_10971.pdf",
+      "processed_path": "data/processed/arxiv_2109_10971.json",
+      "url_or_doi": "https://arxiv.org/abs/2109.10971",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2404_05388",
@@ -176,7 +216,11 @@
       "doi": null,
       "relevance_note": "The advent of advanced AI underscores the urgent need for comprehensive safety evaluations, necessitating collaboration across communities (i.e., AI, software engineering, and governance). However, di",
       "filename": "arxiv_2404_05388.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2404_05388.pdf",
+      "processed_path": "data/processed/arxiv_2404_05388.json",
+      "url_or_doi": "https://arxiv.org/abs/2404.05388",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2502_08108",
@@ -192,7 +236,11 @@
       "doi": null,
       "relevance_note": "The adoption of large language models (LLMs) and autonomous agents in software engineering marks an enduring paradigm shift. These systems create new opportunities for tool design, workflow orchestrat",
       "filename": "arxiv_2502_08108.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2502_08108.pdf",
+      "processed_path": "data/processed/arxiv_2502_08108.json",
+      "url_or_doi": "https://arxiv.org/abs/2502.08108",
+      "tags": ""
     },
     {
       "source_id": "arxiv_1710_09055",
@@ -211,7 +259,11 @@
       "doi": null,
       "relevance_note": "A software project has \"Hero Developers\" when 80% of contributions are delivered by 20% of the developers. Are such heroes a good idea? Are too many heroes bad for software quality? Is it better to ha",
       "filename": "arxiv_1710_09055.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_1710_09055.pdf",
+      "processed_path": "data/processed/arxiv_1710_09055.json",
+      "url_or_doi": "https://arxiv.org/abs/1710.09055",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_14689",
@@ -227,7 +279,11 @@
       "doi": null,
       "relevance_note": "The recent rapid advancement of LLM-based AI systems has accelerated our search and production of information. While the advantages brought by these systems seemingly improve the performance or effici",
       "filename": "arxiv_2504_14689.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_14689.pdf",
+      "processed_path": "data/processed/arxiv_2504_14689.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.14689",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_13684",
@@ -248,7 +304,11 @@
       "doi": null,
       "relevance_note": "Human cognition is constrained by processing limitations, leading to cognitive overload and inefficiencies in knowledge synthesis and decision-making. Large Language Models (LLMs) present an opportuni",
       "filename": "arxiv_2504_13684.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_13684.pdf",
+      "processed_path": "data/processed/arxiv_2504_13684.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.13684",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_16770",
@@ -263,7 +323,11 @@
       "doi": null,
       "relevance_note": "While generative artificial intelligence (Gen AI) increasingly transforms academic environments, a critical gap exists in understanding and mitigating human biases in AI interactions, such as anchorin",
       "filename": "arxiv_2504_16770.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_16770.pdf",
+      "processed_path": "data/processed/arxiv_2504_16770.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.16770",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_16021",
@@ -279,7 +343,11 @@
       "doi": null,
       "relevance_note": "Flow theory describes an optimal cognitive state where individuals experience deep focus and intrinsic motivation when a task's difficulty aligns with their skill level. In AI-augmented reasoning, int",
       "filename": "arxiv_2504_16021.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_16021.pdf",
+      "processed_path": "data/processed/arxiv_2504_16021.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.16021",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2507_08804",
@@ -294,15 +362,19 @@
       "doi": null,
       "relevance_note": "AI-augmented systems are traditionally designed to streamline human decision-making by minimizing cognitive load, clarifying arguments, and optimizing efficiency. However, in a world where algorithmic",
       "filename": "arxiv_2507_08804.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2507_08804.pdf",
+      "processed_path": "data/processed/arxiv_2507_08804.json",
+      "url_or_doi": "https://arxiv.org/abs/2507.08804",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_14996",
       "title": "Distributed Cognition for AI-supported Remote Operations: Challenges and Research Directions",
       "authors": [
-        "Rune Møberg Jacobsen",
+        "Rune M\u00f8berg Jacobsen",
         "Joel Wester",
-        "Helena Bøjer Djernæs",
+        "Helena B\u00f8jer Djern\u00e6s",
         "Niels van Berkel"
       ],
       "year": 2025,
@@ -312,7 +384,11 @@
       "doi": null,
       "relevance_note": "This paper investigates the impact of artificial intelligence integration on remote operations, emphasising its influence on both distributed and team cognition. As remote operations increasingly rely",
       "filename": "arxiv_2504_14996.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_14996.pdf",
+      "processed_path": "data/processed/arxiv_2504_14996.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.14996",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2406_04710",
@@ -328,7 +404,11 @@
       "doi": null,
       "relevance_note": "The ability of Generative AI (GAI) technology to automatically check, synthesize and modify software engineering artifacts promises to revolutionize all aspects of software engineering. Using GAI for ",
       "filename": "arxiv_2406_04710.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2406_04710.pdf",
+      "processed_path": "data/processed/arxiv_2406_04710.json",
+      "url_or_doi": "https://arxiv.org/abs/2406.04710",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2501_03569",
@@ -345,7 +425,11 @@
       "doi": null,
       "relevance_note": "Large language models (LLMs) have rapidly gained popularity and are being embedded into professional applications due to their capabilities in generating human-like content. However, unquestioned reli",
       "filename": "arxiv_2501_03569.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2501_03569.pdf",
+      "processed_path": "data/processed/arxiv_2501_03569.json",
+      "url_or_doi": "https://arxiv.org/abs/2501.03569",
+      "tags": ""
     },
     {
       "source_id": "arxiv_1707_03869",
@@ -364,7 +448,11 @@
       "doi": null,
       "relevance_note": "One source of software project challenges and failures is the systematic errors introduced by human cognitive biases. Although extensively explored in cognitive psychology, investigations concerning c",
       "filename": "arxiv_1707_03869.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_1707_03869.pdf",
+      "processed_path": "data/processed/arxiv_1707_03869.json",
+      "url_or_doi": "https://arxiv.org/abs/1707.03869",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2204_06033",
@@ -381,7 +469,11 @@
       "doi": null,
       "relevance_note": "Context: Citations are a key measure of scientific performance in most fields, including software engineering. However, there is limited research that studies which characteristics of articles' metada",
       "filename": "arxiv_2204_06033.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2204_06033.pdf",
+      "processed_path": "data/processed/arxiv_2204_06033.json",
+      "url_or_doi": "https://arxiv.org/abs/2204.06033",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2406_04780",
@@ -403,7 +495,11 @@
       "doi": null,
       "relevance_note": "Today's distributed and pervasive computing addresses large-scale cyber-physical ecosystems, characterised by dense and large networks of devices capable of computation, communication and interaction ",
       "filename": "arxiv_2406_04780.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2406_04780.pdf",
+      "processed_path": "data/processed/arxiv_2406_04780.json",
+      "url_or_doi": "https://arxiv.org/abs/2406.04780",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2308_05381",
@@ -418,7 +514,11 @@
       "doi": null,
       "relevance_note": "Machine learning (ML) components are being added to more and more critical and impactful software systems, but the software development process of real-world production systems from prototyped ML mode",
       "filename": "arxiv_2308_05381.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2308_05381.pdf",
+      "processed_path": "data/processed/arxiv_2308_05381.json",
+      "url_or_doi": "https://arxiv.org/abs/2308.05381",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2602_08015",
@@ -434,7 +534,11 @@
       "doi": null,
       "relevance_note": "Over twenty years ago, the Software Engineering (SE) research community have been involved with Evidence-Based Software Engineering (EBSE). EBSE aims to inform industrial practice with the best eviden",
       "filename": "arxiv_2602_08015.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2602_08015.pdf",
+      "processed_path": "data/processed/arxiv_2602_08015.json",
+      "url_or_doi": "https://arxiv.org/abs/2602.08015",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2501_02842",
@@ -451,7 +555,11 @@
       "doi": null,
       "relevance_note": "The chapter discusses the foundational impact of modern generative AI models on information access (IA) systems. In contrast to traditional AI, the large-scale training and superior data modeling of g",
       "filename": "arxiv_2501_02842.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2501_02842.pdf",
+      "processed_path": "data/processed/arxiv_2501_02842.json",
+      "url_or_doi": "https://arxiv.org/abs/2501.02842",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_15894",
@@ -470,7 +578,11 @@
       "doi": null,
       "relevance_note": "High stakes decision-making often requires a continuous interplay between evolving evidence and shifting hypotheses, a dynamic that is not well supported by current AI decision support systems. In thi",
       "filename": "arxiv_2504_15894.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_15894.pdf",
+      "processed_path": "data/processed/arxiv_2504_15894.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.15894",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2404_11836",
@@ -490,7 +602,11 @@
       "doi": null,
       "relevance_note": "This paper investigates artificial intelligence (AI) empowered schemes for reconfigurable intelligent surface (RIS) assisted networks from the perspective of fast implementation. We formulate a weight",
       "filename": "arxiv_2404_11836.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2404_11836.pdf",
+      "processed_path": "data/processed/arxiv_2404_11836.json",
+      "url_or_doi": "https://arxiv.org/abs/2404.11836",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2112_01298",
@@ -517,7 +633,11 @@
       "doi": null,
       "relevance_note": "How can humans remain in control of artificial intelligence (AI)-based systems designed to perform tasks autonomously? Such systems are increasingly ubiquitous, creating benefits - but also undesirabl",
       "filename": "arxiv_2112_01298.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2112_01298.pdf",
+      "processed_path": "data/processed/arxiv_2112_01298.json",
+      "url_or_doi": "https://arxiv.org/abs/2112.01298",
+      "tags": ""
     },
     {
       "source_id": "arxiv_2504_08817",
@@ -535,7 +655,11 @@
       "doi": null,
       "relevance_note": "Generative AI has recently had a profound impact on various fields, including daily life, research, and education. To explore its efficient utilization in data-driven materials science, we organized a",
       "filename": "arxiv_2504_08817.pdf",
-      "acquisition_method": "automated"
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2504_08817.pdf",
+      "processed_path": "data/processed/arxiv_2504_08817.json",
+      "url_or_doi": "https://arxiv.org/abs/2504.08817",
+      "tags": ""
     }
   ]
 }

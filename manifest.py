@@ -26,8 +26,8 @@ REQUIRED_FIELDS = [
     "filename",
 ]
 
-# Optional but tracked fields
-OPTIONAL_FIELDS = ["doi", "acquisition_method"]
+# Optional but tracked fields (Appendix A3: raw_path, processed_path, url_or_doi, tags)
+OPTIONAL_FIELDS = ["doi", "acquisition_method", "raw_path", "processed_path", "url_or_doi", "tags"]
 
 
 # ---------------------------------------------------------------------------

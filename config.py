@@ -41,7 +41,7 @@ class RAGConfig:
 
     # Retrieval
     top_k_per_retriever: int = 10  # candidates from each retriever before fusion
-    top_k_final: int = 5           # chunks after RRF fusion
+    top_k_final: int = 7           # chunks after RRF fusion (7 for synthesis)
     rrf_k: int = 60                # RRF constant (standard default)
 
     # Generation
@@ -141,8 +141,10 @@ class PathConfig:
         self.sources_dir = root / "sources"
         self.output_dir = root / "output"
 
-        # Key files
-        self.manifest_path = root / "manifest.json"
+        # Key files (data/data_manifest.json per submission requirements)
+        data_manifest = root / "data" / "data_manifest.json"
+        legacy_manifest = root / "manifest.json"
+        self.manifest_path = data_manifest if data_manifest.exists() else legacy_manifest
         self.chunks_jsonl_path = self.chunks_dir / "chunks.jsonl"
         self.faiss_index_path = self.index_dir / "faiss.index"
         self.bm25_index_path = self.index_dir / "bm25.pkl"

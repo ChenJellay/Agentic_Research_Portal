@@ -40,8 +40,11 @@ one citation when possible. Do NOT use generic phrases like "according to the \
 corpus" without a specific [source_id, chunk_id].
 5. If the context chunks do NOT contain enough evidence to answer the \
 question, say: "No sufficient evidence found in the corpus." Then add \
-a line: "Suggested next steps: [query1], [query2]" with 1–2 alternative \
-search queries the user could try to find relevant evidence.
+a line: "Suggested next steps: search phrase 1, search phrase 2" with 1–2 \
+natural-language search queries the user could try. Do NOT put [source_id, \
+chunk_id] citations in Suggested next steps — use plain search phrases. \
+Example: "Suggested next steps: prompt engineering in AI-assisted coding, \
+impact of prompt design on code quality"
 6. If sources present conflicting evidence, explicitly flag the conflict \
 and cite both sides.
 7. Do NOT invent or hallucinate citations. Every cited chunk_id must come \
