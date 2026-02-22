@@ -98,6 +98,8 @@ class PathConfig:
     logs_dir: Path = field(init=False)
     eval_dir: Path = field(init=False)
     eval_results_dir: Path = field(init=False)
+    threads_dir: Path = field(init=False)
+    artifacts_dir: Path = field(init=False)
 
     # Legacy directories (kept for backward compat)
     sources_dir: Path = field(init=False)
@@ -121,6 +123,8 @@ class PathConfig:
         self.logs_dir = root / "logs"
         self.eval_dir = root / "eval"
         self.eval_results_dir = root / "eval" / "results"
+        self.threads_dir = root / "data" / "threads"
+        self.artifacts_dir = root / "artifacts"
 
         # Legacy
         self.sources_dir = root / "sources"
@@ -140,6 +144,7 @@ class PathConfig:
             self.raw_dir, self.processed_dir, self.chunks_dir,
             self.index_dir, self.logs_dir, self.eval_dir,
             self.eval_results_dir, self.output_dir,
+            self.threads_dir, self.artifacts_dir,
         ]:
             d.mkdir(parents=True, exist_ok=True)
 

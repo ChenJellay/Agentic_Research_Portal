@@ -160,6 +160,7 @@ make run-all
 
 | Command | Description |
 |---------|-------------|
+| `make test` | Run Phase 3 test suite (24 tests) |
 | `python rag_pipeline.py ingest` | Parse, chunk, embed, and index the corpus |
 | `python rag_pipeline.py ingest --force` | Re-process all sources from scratch |
 | `python rag_pipeline.py query "your question"` | Single RAG query with cited answer |
@@ -286,6 +287,63 @@ All settings are in `config.py`:
 | `RAGConfig` | `chunk_size`, `chunk_overlap`, `embedding_model`, `top_k_*`, `rrf_k` |
 | `LogConfig` | `log_dir`, `log_format` |
 | `PathConfig` | All directory and file paths (auto-derived from project root) |
+
+## Phase 3 — Personal Research Portal (PRP)
+
+Phase 3 adds a web UI and research workflow: question → evidence → synthesis → export.
+
+### Running the PRP Locally
+
+1. **Install dependencies** (including frontend):
+   ```bash
+   make install
+   cd frontend && npm install
+   ```
+   For PDF export: `pip install weasyprint markdown fpdf2`. WeasyPrint needs system libs on macOS (`brew install pango`); if unavailable, fpdf2 is used as a fallback (pure Python).
+
+2. **Ingest the corpus** (if not already done):
+   ```bash
+   make ingest
+   ```
+
+3. **Start the backend** (terminal 1):
+   ```bash
+   make serve
+   ```
+   Backend runs at http://localhost:8000. API docs at http://localhost:8000/docs.
+
+4. **Start the frontend** (terminal 2):
+   ```bash
+   make dev
+   ```
+   Frontend runs at http://localhost:5173.
+
+5. Open http://localhost:5173 in your browser.
+
+### PRP Features
+
+- **Ask**: Search bar, run RAG queries, view answers with inline citations
+- **Sources**: Expandable list of retrieved chunks with metadata
+- **History**: Past research threads (query + evidence + answer)
+- **Artifacts**: Generate evidence table, annotated bibliography, or synthesis memo from a thread
+- **Export**: Download artifacts as Markdown, CSV, or PDF
+- **Evaluation**: Run the 22-query suite, view metrics and failure cases
+
+### Trust Behavior
+
+- Every answer includes inline citations `[source_id, chunk_id]`
+- When evidence is insufficient, the system states "No sufficient evidence found in the corpus" and suggests 1–2 alternative search queries
+
+### Phase 3 Directory Layout
+
+```
+  app/                    FastAPI backend
+  frontend/               React (Vite) frontend
+  data/threads/           Research thread JSON files
+  artifacts/              Generated artifact outputs (for report)
+  thread_store.py         File-based thread persistence
+  artifact_generator.py   Evidence table, annotated bib, synthesis memo
+```
 
 ## Phase 2 Deliverables
 

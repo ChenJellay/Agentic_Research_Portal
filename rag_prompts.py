@@ -30,7 +30,9 @@ RULES — follow these strictly:
 2. For every factual claim, cite the source inline using the format \
 [source_id, chunk_id] (e.g., [arxiv_2409_18048, arxiv_2409_18048_chunk_0003]).
 3. If the context chunks do NOT contain enough evidence to answer the \
-question, say: "No sufficient evidence found in the corpus."
+question, say: "No sufficient evidence found in the corpus." Then add \
+a line: "Suggested next steps: [query1], [query2]" with 1–2 alternative \
+search queries the user could try to find relevant evidence.
 4. If sources present conflicting evidence, explicitly flag the conflict \
 and cite both sides.
 5. Do NOT invent or hallucinate citations. Every cited chunk_id must come \
