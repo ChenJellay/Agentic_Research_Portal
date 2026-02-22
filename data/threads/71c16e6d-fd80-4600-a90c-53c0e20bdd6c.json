@@ -1,0 +1,143 @@
+{
+  "thread_id": "71c16e6d-fd80-4600-a90c-53c0e20bdd6c",
+  "created_at": "2026-02-22T03:30:19.293395+00:00",
+  "query": "what do the most recent papers say about the future of software engineering roles",
+  "retrieved_chunks": [
+    {
+      "chunk_id": "arxiv_2501_03569_chunk_0000",
+      "source_id": "arxiv_2501_03569",
+      "section": "Preamble",
+      "page_start": 1,
+      "page_end": 1,
+      "char_start": 0,
+      "char_end": 40,
+      "text": "What Does a Software Engineer Look Like?",
+      "token_count": 8,
+      "score": 0.01639344262295082,
+      "rrf_score": 0.01639344262295082
+    },
+    {
+      "chunk_id": "arxiv_2501_03569_chunk_0006",
+      "source_id": "arxiv_2501_03569",
+      "section": "naJ",
+      "page_start": 1,
+      "page_end": 4,
+      "char_start": 2082,
+      "char_end": 4353,
+      "text": "African American men in activities like basketball [34], while\nRQ2. Whether and to what extent do images generated DALL-E Mini depicts white individuals in high-status roles\nby LLMs reinforce societal stereotypes about software and non-white individuals in lower-status occupations [33].\nengineers? In professional settings, especially software engineering,\nWe generated a total of 300 synthetic profiles, 100 gender- generative AI models have been observed to reinforce biases.\nbased and 50 gender-neutral profiles from each LLM (GPT-4 Research shows that image models like DALL-E and Stable\nand Copilot) specific to SE roles and evaluated them against Diffusion underrepresent women and people of colour in\njob requirements for four distinct SE positions. Both LLMs technical roles, while predominantly depicting white men,\nwereaskedtoselectthetop5candidatesandthenthebestcan- reinforcingstereotypesofmaledominance[32],[33].Women,\ndidate for each role. Both LLMs were also asked to generate when shown, are often portrayed as smiling, submissive, and\nimages for the top 5 candidates, enabling analysis of potential in non-leadership roles [27]. This bias discourages diversity,\nbiases in both text selections and visual representations. Our limitingopportunitiesforunderrepresentedgroupsandperpet-\nanalysis revealed the presence of a number of societal stereo- uating exclusionary narratives in the technology sector [31].\ntypes related to who is considered employable as software These studies have served to start the conversation around\nengineersandwhatsoftwareengineerslooklike.Forexample, the important topic of societal stereotypes manifesting in the\nboth models predominantly favoured male, Caucasian profiles outputsofLLMs.Ourstudyaimstoprogressthisconversation\nfor senior roles, depicting traits such as lighter skin tones, in the specific context of SE and the perception of software\nslimmer bodies, and younger appearances. engineers,bysystematicallyexploringpotentialsocietalbiases\nThis research contributes to the research on the use of ethi- in text and visual outputs of LLMs across multiple facets of\ncalAIinSEbypromotinginclusiveandequitabletechnologies gender, race/ethnicity, culture or religion, age, body type, and\nthat support a diverse workforce.",
+      "token_count": 478,
+      "score": 0.01639344262295082,
+      "rrf_score": 0.01639344262295082
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0098",
+      "source_id": "ijnrd_2024",
+      "section": "7. Conclusion",
+      "page_start": 13,
+      "page_end": 13,
+      "char_start": 0,
+      "char_end": 366,
+      "text": "computational power with human creativity and\noversight, the future of software engineering\nAI-augmented software development, driven\nwill be more efficient, innovative, and resilient\nby Large Language Models (LLMs), is\nthan ever before.\nrevolutionizing the way developers write, test,\nand deploy code. By enhancing code quality,\nboosting developer productivity, and",
+      "token_count": 74,
+      "score": 0.016129032258064516,
+      "rrf_score": 0.016129032258064516
+    },
+    {
+      "chunk_id": "arxiv_2405_01543_chunk_0015",
+      "source_id": "arxiv_2405_01543",
+      "section": "tionaboutwhichstockscouldbetradedattheexchangeandaskedittosimulate",
+      "page_start": 7,
+      "page_end": 8,
+      "char_start": 2018,
+      "char_end": 3080,
+      "text": "One manager explained, ”A bid I would normally have spent a lot of\ntime in writing, I only spent 20 minutes on. Previously I would have spent a lot\nof time, looking for previous bids, adapting it and merging it. It is terrible to say\nit out loud [laughing], as this kind of is in someway reducing the need for my\nwork. This type of work is what the company pays me to do.”\n8 R. Ulfsnes et al. Another example is when you are building up technical specifications and\ntechnical architectures where the style of the text is quite consistent but the\ncontent varies between use cases. Or getting feedback on emails, and getting a\nheadstart on the writing of the text. 4.6 Working with existing code\nThis was the most common activity among software developers. GenAI was\nusedonmanydifferenttasks,rangingfromrefactoringorsimplifyingcode,code\nreview,translatingcodefromoneprogramminglanguagetoanother,andsimply\nexplaining the code. Testing was also well-suited for GenAI utilization, given its\nrepetitive nature, GenAI was used to create numerous tests for the code. The",
+      "token_count": 249,
+      "score": 0.016129032258064516,
+      "rrf_score": 0.016129032258064516
+    },
+    {
+      "chunk_id": "arxiv_2405_01543_chunk_0007",
+      "source_id": "arxiv_2405_01543",
+      "section": "Competingfortalentsrequiresaconsciousefforttoofferanattractiveworkplace",
+      "page_start": 2,
+      "page_end": 3,
+      "char_start": 1965,
+      "char_end": 3574,
+      "text": "Introducing GenAI in software teams is therefore a balancing act. 2.2 Software development, knowledge work and technology\nSoftware engineering requires the input and consolidation of various informa-\ntion to produce code [26]. Furthermore, with the advent of DevOps with its\nincrease in speed of delivering continuously [13], increased accessibility to third-\nparty libraries and frameworks, the process of software engineering has shifted\nfrom being about understanding the computer and the programming language\ntowards understanding how to compose relevant libraries and frameworks, with\napplicable testing. Software development encompasses more than just programming and team-\nwork, it also involves actively seeking knowledge online and in knowledge man-\nagement systems [12], conducting testing and code reviewing [14], and taking\nadvantage of software such as Integrated Development Environments. IDEs has\nbeen a researched topic for quite some time [26] as well as how online resources\n[8,18]aidandenhancethedevelopmentprocess,bothinspeedandqualityacross\nvarying ranges of experience. Through the use of IDEs, software engineers have\ngottenaccesstocapabilitiesforrefactoring,debugging,sourcerepositories,third-\nparty plugins[26] and auto-completion of code [6]. In addition, developers need\nto browse through a plethora of different files in existing software solutions in\norder to get a grasp of how changes to the code need to be implemented [17]. More recently, better auto-completion methodologies and technologies have\nbeen introduced to provide more context-relevant suggestions using statistical",
+      "token_count": 319,
+      "score": 0.015873015873015872,
+      "rrf_score": 0.015873015873015872
+    }
+  ],
+  "answer": "The most recent papers provide insights into the future of software engineering roles, emphasizing the integration of AI and the shift in the nature of these roles. According to the paper \"AI-Augmented Software Development: Enhancing Code Quality and Developer Productivity\" [ijnrd_2024, section 7], the future of software engineering will be more efficient, innovative, and resilient, driven by Large Language Models (LLMs). This transformation is characterized by the use of computational power to augment human creativity and oversight, leading to more efficient and innovative software development processes.\n\nMoreover, the paper \"Transforming Software Development with Generative AI: Empirical Insights on Collaboration and Workflow\" [arxiv_2405_01543, section 4.6] highlights that GenAI is being used in various tasks, including code refactoring, simplifying code, creating tests, and providing explanations for code. These activities suggest a shift where developers are leveraging AI to enhance their productivity and focus on higher-level tasks that require human creativity and oversight.\n\nIn summary, the most recent papers indicate that AI will play a significant role in augmenting software engineering roles, leading to more efficient workflows and a focus on higher-level problem-solving and innovation rather than repetitive coding tasks.\n\n## References\n- [arxiv_2405_01543, arxiv_2405_01543_chunk_0015]\n- [ijnrd_2024, ijnrd_2024_chunk_0098]",
+  "citations": [
+    {
+      "source_id": "ijnrd_2024",
+      "chunk_id": "section 7"
+    },
+    {
+      "source_id": "arxiv_2405_01543",
+      "chunk_id": "section 4.6"
+    },
+    {
+      "source_id": "arxiv_2405_01543",
+      "chunk_id": "arxiv_2405_01543_chunk_0015"
+    },
+    {
+      "source_id": "ijnrd_2024",
+      "chunk_id": "ijnrd_2024_chunk_0098"
+    }
+  ],
+  "source_metadata": {
+    "arxiv_2405_01543": {
+      "source_id": "arxiv_2405_01543",
+      "title": "Transforming Software Development with Generative AI: Empirical Insights on Collaboration and Workflow",
+      "authors": [
+        "Rasmus Ulfsnes",
+        "Nils Brede Moe",
+        "Viktoria Stray",
+        "Marianne Skarpen"
+      ],
+      "year": 2024,
+      "type": "preprint",
+      "venue": "arXiv",
+      "link": "https://arxiv.org/abs/2405.01543",
+      "doi": null,
+      "relevance_note": "Generative AI (GenAI) has fundamentally changed how knowledge workers, such as software developers, solve tasks and collaborate to build software products. Introducing innovative tools like ChatGPT an",
+      "filename": "arxiv_2405_01543.pdf",
+      "acquisition_method": "automated"
+    },
+    "ijnrd_2024": {
+      "source_id": "ijnrd_2024",
+      "title": "AI-Augmented Software Development: Enhancing Code Quality and Developer Productivity",
+      "authors": [
+        "IJNRD Author(s)"
+      ],
+      "year": 2024,
+      "type": "journal_article",
+      "venue": "International Journal of Novel Research and Development",
+      "link": "https://www.ijnrd.org/",
+      "doi": null,
+      "relevance_note": "Measures code quality and developer productivity improvements through AI augmentation.",
+      "filename": "ijnrd_2024.pd.pdf",
+      "acquisition_method": "manual"
+    },
+    "arxiv_2501_03569": {
+      "source_id": "arxiv_2501_03569",
+      "title": "What Does a Software Engineer Look Like? Exploring Societal Stereotypes in LLMs",
+      "authors": [
+        "Muneera Bano",
+        "Hashini Gunatilake",
+        "Rashina Hoda"
+      ],
+      "year": 2025,
+      "type": "preprint",
+      "venue": "arXiv",
+      "link": "https://arxiv.org/abs/2501.03569",
+      "doi": null,
+      "relevance_note": "Large language models (LLMs) have rapidly gained popularity and are being embedded into professional applications due to their capabilities in generating human-like content. However, unquestioned reli",
+      "filename": "arxiv_2501_03569.pdf",
+      "acquisition_method": "automated"
+    }
+  }
+}
