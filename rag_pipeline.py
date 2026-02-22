@@ -91,11 +91,14 @@ class RAGQueryEngine:
 
         rag_cfg = get_rag_config()
 
-        # 1. Retrieve
-        retrieved = self.retriever.retrieve(question)
+        # 1. Retrieve (fill to context budget when configured)
+        retrieved = self.retriever.retrieve(
+            question,
+            context_token_budget=rag_cfg.rag_context_budget_tokens,
+        )
         logger.info(f"Retrieved {len(retrieved)} chunks for query")
 
-        # 2. Build prompt
+        # 2. Build prompt (respect context budget)
         source_ids_in_context = {c["source_id"] for c in retrieved}
         source_meta = {}
         for sid in source_ids_in_context:
@@ -103,7 +106,10 @@ class RAGQueryEngine:
             if entry:
                 source_meta[sid] = entry
 
-        prompt = build_rag_prompt(question, retrieved, source_meta)
+        prompt = build_rag_prompt(
+            question, retrieved, source_meta,
+            context_token_budget=rag_cfg.rag_context_budget_tokens,
+        )
         logger.debug(f"Prompt length: {len(prompt)} chars")
 
         # 3. Generate
@@ -210,6 +216,7 @@ def cmd_evaluate(args: argparse.Namespace) -> None:
     print(f"  Evaluated:               {summary['evaluated']}")
     print(f"  Avg Groundedness:        {summary['avg_groundedness']:.4f}")
     print(f"  Avg Citation Precision:  {summary['avg_citation_precision']:.4f}")
+    print(f"  Avg Confidence:          {summary.get('avg_confidence', 0):.4f}")
     print(f"  Failure cases:           {summary['failure_cases_count']}")
     print(f"\nDetailed results saved to: {get_path_config().eval_results_dir}")
 

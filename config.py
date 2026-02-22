@@ -49,6 +49,17 @@ class RAGConfig:
     rag_temperature: float = 0.3   # lower for more faithful answers
     prompt_template_version: str = "v1"
 
+    # Context window (SLM optimization)
+    slm_context_window: int = 32768         # Qwen2.5-7B-Instruct; configurable
+    rag_context_buffer_tokens: int = 2048   # system prompt + safety margin
+    rag_context_budget_tokens: Optional[int] = None  # if None, auto: window - max_tokens - buffer
+
+    def __post_init__(self) -> None:
+        if self.rag_context_budget_tokens is None:
+            self.rag_context_budget_tokens = (
+                self.slm_context_window - self.rag_max_tokens - self.rag_context_buffer_tokens
+            )
+
 
 # ---------------------------------------------------------------------------
 # Agent configuration (Phase 3 — Agentic RAG)

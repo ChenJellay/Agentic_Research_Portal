@@ -24,6 +24,7 @@ from rank_bm25 import BM25Okapi
 from config import get_path_config, get_rag_config
 from embedder import embed_query
 from logger_config import setup_logger
+from token_utils import count_tokens
 from vector_store import VectorStore
 
 logger = setup_logger(__name__)
@@ -171,11 +172,18 @@ class HybridRetriever:
         self.vector_store.load()
         self.bm25_index.load()
 
+    def _chunk_token_count(self, chunk: Dict[str, Any]) -> int:
+        """Return token count for a chunk, using metadata or estimating from text."""
+        if "token_count" in chunk and isinstance(chunk["token_count"], (int, float)):
+            return int(chunk["token_count"])
+        return count_tokens(chunk.get("text", ""))
+
     def retrieve(
         self,
         query: str,
         top_k_per: Optional[int] = None,
         top_k_final: Optional[int] = None,
+        context_token_budget: Optional[int] = None,
     ) -> List[Dict[str, Any]]:
         """
         Run hybrid retrieval and return fused results.
@@ -184,6 +192,9 @@ class HybridRetriever:
             query: natural-language question.
             top_k_per: candidates from each retriever (default from RAGConfig).
             top_k_final: final result count after RRF (default from RAGConfig).
+                Ignored when context_token_budget is provided.
+            context_token_budget: if provided, return chunks in RRF order that
+                fit within this token budget (fill greedily).
 
         Returns:
             List of chunk dicts sorted by RRF score.
@@ -201,12 +212,32 @@ class HybridRetriever:
         bm25_results = self.bm25_index.search(query, top_k=top_k_per)
         logger.debug(f"BM25 retrieval returned {len(bm25_results)} result(s)")
 
-        # Fuse
+        # Fuse — use larger pool when filling to budget
+        rrf_top_k = 50 if context_token_budget else top_k_final
         fused = reciprocal_rank_fusion(
             [dense_results, bm25_results],
             k=cfg.rrf_k,
-            top_k=top_k_final,
+            top_k=rrf_top_k,
         )
+
+        if context_token_budget is not None:
+            # Greedily add chunks until budget would be exceeded
+            result: List[Dict[str, Any]] = []
+            used = 0
+            for chunk in fused:
+                tc = self._chunk_token_count(chunk)
+                if used + tc <= context_token_budget:
+                    result.append(chunk)
+                    used += tc
+                else:
+                    break
+            logger.info(
+                f"Hybrid retrieval for '{query[:60]}…': "
+                f"{len(dense_results)} dense + {len(bm25_results)} BM25 → "
+                f"{len(result)} chunks ({used} tokens, budget {context_token_budget})"
+            )
+            return result
+
         logger.info(
             f"Hybrid retrieval for '{query[:60]}…': "
             f"{len(dense_results)} dense + {len(bm25_results)} BM25 → {len(fused)} fused"
