@@ -5,9 +5,16 @@ Centralizes all configuration constants, model settings, RAG parameters,
 agent settings, and path mappings.
 """
 
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 
 # ---------------------------------------------------------------------------
@@ -49,12 +56,23 @@ class RAGConfig:
     rag_temperature: float = 0.3   # lower for more faithful answers
     prompt_template_version: str = "v1"
 
+    # LLM provider for RAG (mlx | openai | anthropic | gemini)
+    rag_llm_provider: str = "mlx"
+    rag_model: Optional[str] = None   # Cloud model override (e.g. gemini-2.0-flash)
+
     # Context window (SLM optimization)
     slm_context_window: int = 32768         # Qwen2.5-7B-Instruct; configurable
     rag_context_buffer_tokens: int = 2048   # system prompt + safety margin
     rag_context_budget_tokens: Optional[int] = None  # if None, auto: window - max_tokens - buffer
 
     def __post_init__(self) -> None:
+        # Env overrides for RAG provider
+        if os.environ.get("RAG_PROVIDER"):
+            self.rag_llm_provider = os.environ["RAG_PROVIDER"].lower().strip()
+        rag_model_env = (os.environ.get("RAG_MODEL") or "").strip()
+        if rag_model_env:
+            self.rag_model = rag_model_env
+
         if self.rag_context_budget_tokens is None:
             self.rag_context_budget_tokens = (
                 self.slm_context_window - self.rag_max_tokens - self.rag_context_buffer_tokens

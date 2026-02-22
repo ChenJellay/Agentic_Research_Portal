@@ -46,8 +46,17 @@ ifndef Q
 endif
 	$(PYTHON) rag_pipeline.py query "$(Q)"
 
+query-gemini:  ## Run a single query with Gemini API (usage: make query-gemini Q="...")
+ifndef Q
+	$(error Q is not set. Usage: make query-gemini Q="your question here")
+endif
+	RAG_PROVIDER=gemini $(PYTHON) rag_pipeline.py query "$(Q)"
+
 evaluate:  ## Run evaluation suite (22 queries, metrics + report)
 	$(PYTHON) rag_pipeline.py evaluate
+
+evaluate-gemini:  ## Run evaluation suite with Gemini API
+	RAG_PROVIDER=gemini $(PYTHON) rag_pipeline.py evaluate
 
 run-all: ingest evaluate  ## End-to-end: ingest then evaluate
 

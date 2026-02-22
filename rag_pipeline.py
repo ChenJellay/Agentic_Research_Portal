@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from config import get_model_config, get_path_config, get_rag_config
+from config import get_path_config, get_rag_config
 from evaluator import run_evaluation
 from ingest import run_ingestion
 from logger_config import RAGRunLogger, setup_logger
@@ -35,6 +35,7 @@ from rag_prompts import (
     extract_citations,
     validate_citations,
 )
+from llm_provider import LLMProvider, get_provider
 from retriever import HybridRetriever
 from source_acquisition import acquire_sources
 
@@ -51,9 +52,15 @@ class RAGQueryEngine:
       retrieve → prompt → generate → validate citations → log.
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        provider: Optional[str] = None,
+        model: Optional[str] = None,
+    ) -> None:
         self.retriever = HybridRetriever()
-        self.agent: Optional[Any] = None  # MLXAgent, lazily loaded
+        self._provider: Optional[LLMProvider] = None
+        self._provider_name = provider  # override from constructor
+        self._model_override = model
         self.manifest: List[Dict[str, Any]] = []
         self.run_logger = RAGRunLogger(get_path_config().logs_dir)
         self._chunk_id_set: set = set()
@@ -71,13 +78,13 @@ class RAGQueryEngine:
             self._chunk_id_set = {m["chunk_id"] for m in meta}
         logger.info("RAG query engine loaded.")
 
-    def _ensure_model(self):  # -> MLXAgent (lazy import)
-        if self.agent is None:
-            from mlx_agent import MLXAgent
-            cfg = get_model_config()
-            self.agent = MLXAgent(cfg)
-            self.agent.initialize_model()
-        return self.agent
+    def _ensure_provider(self) -> LLMProvider:
+        if self._provider is None:
+            rag_cfg = get_rag_config()
+            provider_name = self._provider_name or rag_cfg.rag_llm_provider
+            model = self._model_override or rag_cfg.rag_model
+            self._provider = get_provider(provider_name, model=model)
+        return self._provider
 
     def query(self, question: str) -> Tuple[str, List[Dict[str, Any]]]:
         """
@@ -113,9 +120,10 @@ class RAGQueryEngine:
         logger.debug(f"Prompt length: {len(prompt)} chars")
 
         # 3. Generate
-        agent = self._ensure_model()
-        answer = agent.generate_response(
-            prompt,
+        provider = self._ensure_provider()
+        answer = provider.generate(
+            prompt=prompt,
+            system="",
             max_tokens=rag_cfg.rag_max_tokens,
             temperature=rag_cfg.rag_temperature,
         )
@@ -134,7 +142,7 @@ class RAGQueryEngine:
             retrieved_chunks=retrieved,
             model_output=answer,
             prompt_template_version=PROMPT_TEMPLATE_VERSION,
-            model_name=get_model_config().model_name,
+            model_name=provider.model_name,
             citations_found=[c["chunk_id"] for c in citations],
             extra={
                 "valid_citations": len(validation["valid"]),
@@ -178,7 +186,7 @@ def cmd_query(args: argparse.Namespace) -> None:
         print("Error: please provide a non-empty query.")
         sys.exit(1)
 
-    engine = RAGQueryEngine()
+    engine = RAGQueryEngine(provider=args.provider, model=args.model)
     engine.load()
 
     answer, retrieved = engine.query(question)
@@ -200,7 +208,7 @@ def cmd_query(args: argparse.Namespace) -> None:
 
 def cmd_evaluate(args: argparse.Namespace) -> None:
     """Handle the ``evaluate`` subcommand."""
-    engine = RAGQueryEngine()
+    engine = RAGQueryEngine(provider=args.provider, model=args.model)
     engine.load()
 
     def run_query_fn(q: str) -> Tuple[str, List[Dict[str, Any]]]:
@@ -323,9 +331,27 @@ examples:
     # --- query ---
     p_query = subparsers.add_parser("query", help="Run a single RAG query")
     p_query.add_argument("question", nargs="+", help="The question to ask")
+    p_query.add_argument(
+        "--provider", type=str, default=None,
+        choices=["mlx", "openai", "anthropic", "gemini"],
+        help="LLM provider for RAG (default: mlx or RAG_PROVIDER env)",
+    )
+    p_query.add_argument(
+        "--model", type=str, default=None,
+        help="Model override for cloud providers (e.g. gemini-2.0-flash)",
+    )
 
     # --- evaluate ---
     p_eval = subparsers.add_parser("evaluate", help="Run full evaluation suite")
+    p_eval.add_argument(
+        "--provider", type=str, default=None,
+        choices=["mlx", "openai", "anthropic", "gemini"],
+        help="LLM provider for RAG (default: mlx or RAG_PROVIDER env)",
+    )
+    p_eval.add_argument(
+        "--model", type=str, default=None,
+        help="Model override for cloud providers (e.g. gemini-2.0-flash)",
+    )
 
     # --- acquire ---
     p_acquire = subparsers.add_parser("acquire", help="Download sources from arXiv / Semantic Scholar")
@@ -340,7 +366,7 @@ examples:
     p_research.add_argument("prompt", nargs="+", help="Natural-language research question")
     p_research.add_argument(
         "--provider", type=str, default="mlx",
-        choices=["mlx", "openai", "anthropic"],
+        choices=["mlx", "openai", "anthropic", "gemini"],
         help="LLM provider for agent reasoning (default: mlx)",
     )
     p_research.add_argument(

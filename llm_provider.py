@@ -29,6 +29,12 @@ class LLMProviderError(Exception):
 class LLMProvider(ABC):
     """Base class for all LLM providers."""
 
+    @property
+    @abstractmethod
+    def model_name(self) -> str:
+        """Display name of the model for logging."""
+        ...
+
     @abstractmethod
     def generate(
         self,
@@ -67,6 +73,10 @@ class MLXProvider(LLMProvider):
             self._config = get_model_config()
         self._agent = None  # lazy
 
+    @property
+    def model_name(self) -> str:
+        return self._config.model_name
+
     def _ensure_agent(self):
         if self._agent is None:
             from mlx_agent import MLXAgent
@@ -104,6 +114,10 @@ class OpenAIProvider(LLMProvider):
     def __init__(self, model: str = "gpt-4o") -> None:
         self.model = model
         self._client = None  # lazy
+
+    @property
+    def model_name(self) -> str:
+        return self.model
 
     def _ensure_client(self):
         if self._client is None:
@@ -165,6 +179,10 @@ class AnthropicProvider(LLMProvider):
         self.model = model
         self._client = None  # lazy
 
+    @property
+    def model_name(self) -> str:
+        return self.model
+
     def _ensure_client(self):
         if self._client is None:
             try:
@@ -218,6 +236,80 @@ class AnthropicProvider(LLMProvider):
 
 
 # ---------------------------------------------------------------------------
+# Gemini provider
+# ---------------------------------------------------------------------------
+
+class GeminiProvider(LLMProvider):
+    """Uses the Google Gemini API (requires ``GEMINI_API_KEY``)."""
+
+    def __init__(self, model: str = "gemini-2.0-flash") -> None:
+        self.model = model
+        self._client = None  # lazy
+
+    @property
+    def model_name(self) -> str:
+        return self.model
+
+    def _ensure_client(self):
+        if self._client is None:
+            try:
+                from dotenv import load_dotenv
+                load_dotenv()
+            except ImportError:
+                pass
+
+            api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+            if not api_key:
+                raise LLMProviderError(
+                    "GEMINI_API_KEY not set. Export it or add to .env file."
+                )
+
+            try:
+                from google import genai
+            except ImportError:
+                raise LLMProviderError(
+                    "google-genai package not installed. Run: pip install google-genai"
+                )
+
+            self._client = genai.Client(api_key=api_key)
+        return self._client
+
+    def generate(
+        self,
+        prompt: str,
+        system: str = "",
+        max_tokens: int = 1024,
+        temperature: float = 0.4,
+    ) -> str:
+        client = self._ensure_client()
+
+        try:
+            from google.genai import types
+
+            config_kw = {
+                "max_output_tokens": max_tokens,
+                "temperature": temperature,
+            }
+            if system:
+                config_kw["system_instruction"] = system
+                contents = prompt
+            else:
+                contents = prompt
+
+            config = types.GenerateContentConfig(**config_kw)
+            response = client.models.generate_content(
+                model=self.model,
+                contents=contents,
+                config=config,
+            )
+            if response.text is None:
+                return ""
+            return response.text
+        except Exception as e:
+            raise LLMProviderError(f"Gemini generation failed: {e}") from e
+
+
+# ---------------------------------------------------------------------------
 # Factory
 # ---------------------------------------------------------------------------
 
@@ -226,7 +318,7 @@ def get_provider(provider_name: str, model: Optional[str] = None) -> LLMProvider
     Create an :class:`LLMProvider` by name.
 
     Args:
-        provider_name: One of ``"mlx"``, ``"openai"``, ``"anthropic"``.
+        provider_name: One of ``"mlx"``, ``"openai"``, ``"anthropic"``, ``"gemini"``.
         model: Optional model override (e.g. ``"gpt-4o-mini"``).
 
     Returns:
@@ -240,8 +332,10 @@ def get_provider(provider_name: str, model: Optional[str] = None) -> LLMProvider
         return OpenAIProvider(model=model or "gpt-4o")
     elif name == "anthropic":
         return AnthropicProvider(model=model or "claude-sonnet-4-20250514")
+    elif name == "gemini":
+        return GeminiProvider(model=model or "gemini-2.0-flash")
     else:
         raise ValueError(
             f"Unknown LLM provider: {provider_name!r}. "
-            f"Choose from: mlx, openai, anthropic"
+            f"Choose from: mlx, openai, anthropic, gemini"
         )
