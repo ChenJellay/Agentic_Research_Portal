@@ -1,0 +1,421 @@
+{
+  "thread_id": "7a8e71ff-2753-48ad-b722-d5bf57e37fa5",
+  "created_at": "2026-03-01T01:49:16.364542+00:00",
+  "query": "how does AI affect code review?",
+  "retrieved_chunks": [
+    {
+      "chunk_id": "ijnrd_2024_chunk_0044",
+      "source_id": "ijnrd_2024",
+      "section": "Code Quality Enhancement",
+      "section_path": "Code Quality Enhancement",
+      "page_start": 6,
+      "page_end": 6,
+      "char_start": 0,
+      "char_end": 129,
+      "text": "significant time spent on code reviews.\nArtificial Intelligence (AI) is transforming\nWhile AI has significantly improved software",
+      "token_count": 22,
+      "score": 0.01639344262295082,
+      "rrf_score": 0.01639344262295082
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0011",
+      "source_id": "arxiv_2109_10971",
+      "section": "results produced by high-quality software, and in the long term, through cre-",
+      "section_path": "results produced by high-quality software, and in the long term, through cre-",
+      "page_start": 4,
+      "page_end": 4,
+      "char_start": 0,
+      "char_end": 1168,
+      "text": "ationofmoremaintainablesoftware(McIntoshetal.2014).Thehigherquality\nscientificresultsoccurbecausedevelopersfocustheirattentiononthecodeit-\nselftoidentifymistakes,inefficiencies,andotheraspectsofthecodethatneed\nimprovement. The improved maintainability arises because as team members\nstart reviewing each other’s code, they begin writing more readable code to\nenable the peer-review process. Code that is more readable and easier to un-\nderstand is also more maintainable over time.\nHowever, despite the benefits peer code review can provide, developers\nof research software do not yet apply it widely (Petre and Wilson 2014). In\naddition, the literature does not contain any studies on the use of peer code\nreview in research software. Therefore, to better understand how to increase\nthe usage of peer code review in research software development, this paper\nfocuses on characterizing how research software developers perform peer code\nreview. The primary goal of this study is to better understand the practices,\ndifficulties, impacts, and potential areas of improvement of peer code review\nin research software development. To gather this insight, we interviewed and",
+      "token_count": 254,
+      "score": 0.01639344262295082,
+      "rrf_score": 0.01639344262295082
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0068",
+      "source_id": "ijnrd_2024",
+      "section": "Powered Development",
+      "section_path": "Powered Development",
+      "page_start": 10,
+      "page_end": 10,
+      "char_start": 0,
+      "char_end": 74,
+      "text": "✔ Developers must actively review, modify,\nand validate AI-generated code.",
+      "token_count": 14,
+      "score": 0.016129032258064516,
+      "rrf_score": 0.016129032258064516
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0040",
+      "source_id": "arxiv_2109_10971",
+      "section": "Respondentsarealsoconcernedthatthecodeauthorswillmisunderstand",
+      "section_path": "Respondentsarealsoconcernedthatthecodeauthorswillmisunderstand",
+      "page_start": 18,
+      "page_end": 20,
+      "char_start": 0,
+      "char_end": 2106,
+      "text": "criticism. This concern makes reviewers less willing to provide criticism and\nconcerned with how the criticism might affect team dynamics. As one respon-\ndent noted “sometimes people get annoyed when they get feedback especially if\nthey think they are experts. Sometimes people have misunderstandings about\ncomments.”\n4.3 RQ2: What effect does peer code review have on research\nsoftware? The results of Q17 showed that 74 of the 84 participants strongly agreed\nthat peer code review is important for their project. Perhaps this result is\nDevelopersPerceptionofPeerCodeReviewinResearchSoftwareDevelopment 19\nFig. 13 Negativeexperienceswithpeercodereview\nnot surprising given that these people chose to participate in a survey about\npeer code review practices. In response to Q18, the participants gave four\nprimaryreasonsforthepositiveresponses(Figure14).Intermsof improving\ncode quality, participants said “reviews are a way to improve the code and\nlearn, without them bugs would proliferate and code quality would decrease”\nand “it’s a means of improving the quality of the software, and of improving\nthe individuals who write it” In terms of knowledge sharing, “peer code\nreview helps ensure that at least two people have always looked at each piece\nof code, spreading out expertise. Additionally, it is a forum for learning from\neach other”. One of the few participants who did not think peer code review was im-\nportant suggested that “requiring peer code review as a compliance activity is\na waste of time. Since that is our project’s policy, I view peer code review as\na box to be checked”. Fig. 14 Explanationofwhypeercodereviewisimportant\nThe results of Q19 showed that 77 out of the 84 participants strongly\nagreed that peer code review improves code. In response to Q20, the partic-\nipants gave nine reasons why they believed peer code review improved their\ncode (Figure 15). The most popular reason participants gave was that peer\n20 NasirU.Eisty,JeffreyC.Carver\ncodereviewhelpedwithcorrectness.Asonerespondentsaid“If you’ve writ-\nten code yourself, it’s hard to see the assumptions you’ve made.",
+      "token_count": 472,
+      "score": 0.016129032258064516,
+      "rrf_score": 0.016129032258064516
+    },
+    {
+      "chunk_id": "ijsr_2024_chunk_0010",
+      "source_id": "ijsr_2024",
+      "section": "standardized code deep understanding supervision",
+      "section_path": "standardized code deep understanding supervision",
+      "page_start": 4,
+      "page_end": 4,
+      "char_start": 0,
+      "char_end": 91,
+      "text": "suggestions\nCode AI-generated code can be AI may introduce complexity Focus on architecture",
+      "token_count": 16,
+      "score": 0.015873015873015872,
+      "rrf_score": 0.015873015873015872
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0017",
+      "source_id": "arxiv_2109_10971",
+      "section": "hasconvertedtheirprocessintoonewithmarkedlysmallerchangesandquicker",
+      "section_path": "hasconvertedtheirprocessintoonewithmarkedlysmallerchangesandquicker",
+      "page_start": 6,
+      "page_end": 7,
+      "char_start": 0,
+      "char_end": 2350,
+      "text": "reviews (Sadowski et al. 2018). While there is extensive research on peer code review in commercial and\nopensourcesoftware,thereisnoempiricalresearchontheuseofpeercodere-\nview in research software. Therefore, we must first gain a basic understanding\nof the process research software developers follow when performing peer code\nreview. We pose the following research question to gather developers percep-\ntions about the peer code review process research software developers follow\nalong with their positive and negative experiences. RQ1: How do research software developers perform peer code\nreview? One of the effects of peer code review is that it helps developers form\nimpressions of their teammates. The quality of the submitted code is key\nin this impression formation process. For instance, a developer who submits\nsimple, understandable, and self-documenting code that requires minimum\nreview time may gain improved social status. Another effect of peer code\nreview is participation in the peer code review process has strong positive\nDevelopersPerceptionofPeerCodeReviewinResearchSoftwareDevelopment 7\neffectsonfuturecollaborations.Asacodeauthor’sreputationincreasesbased\non high-quality code submissions, it helps her future code submissions. In\naddition, as an author’s reputation increases, people begin to believe more in\nher expertise and request her to review their code. A reviewer’s perception of\nthe expertise of the code author also influences the level of scrutiny she uses\nduring the peer code review (Bosu and Carver 2013; Bosu et al. 2017). Based on these earlier findings, we pose the following question to under-\nstand whether the benefits of peer code review seen in open source and com-\nmercialsoftware(discussedabove)alsoappearinresearchsoftware.Tounder-\nstandtheprevalenceofthesebenefits,weneedtogatherdevelopersperceptions\nabout how peer code review impacts research software. RQ2: What effect does peer code review have on research\nsoftware? Developers and reviewers also face challenges in performing peer code re-\nview. Reviewers find that understanding the code and the motivation for a\nchange are the most difficult aspects of peer code review. In addition, many\npeople think peer code review is time-consuming, with the task of under-\nstanding the change being the most time-consuming (Sutherland and Venolia\n2009).",
+      "token_count": 489,
+      "score": 0.015873015873015872,
+      "rrf_score": 0.015873015873015872
+    },
+    {
+      "chunk_id": "arxiv_2502_08108_chunk_0016",
+      "source_id": "arxiv_2502_08108",
+      "section": "Gen AI",
+      "section_path": "Gen AI",
+      "page_start": 4,
+      "page_end": 5,
+      "char_start": 8648,
+      "char_end": 10995,
+      "text": "Moreover, over-reliance on AI\n• Investigate which aspects of human coding practice may toolsmaycauseresearcherstooverlooksubtlecontextualcues\nbe overlooked or homogenized in AI-generated or AI- that manual analysis would reveal. Therefore, transparency in\nmodified code. model versions, prompts, and evaluation parameters becomes\n• Analyzewhichcontextualcuesarelostwhenbugreports central to research validity.\nor reviews are generated or pre-filtered by AI. To protect rigor in AI-related studies, we recommend:\n• Examine how mentorship, authorship, and knowledge • Prefer open or reproducible models to enhance trans-\ntransfer change in AI-driven code-review workflows. parency and facilitate replication.\n• Compare the clarity, rationale, and completeness of AI- • Employ adaptive research designs that can accommodate\ngenerated commit messages with human-written ones. shifting model behaviors and evolving tool capabilities.\n• Evaluate how well AI-generated test oracles and sum- • Regularly revisit constructs to reflect changes in the\nmaries capture human judgment and intuition. software engineering landscape caused by AI.\n• Studyhowcommunityparticipationandlearningdynam- • Leverage mixed methods [26], [54] to capture the tech-\nics shift as AI mediates or replaces traditional collabora- nical and social dimensions of AI-mediated workflows.\ntive platforms. • Explicitly evaluate and report on the assumptions and\nbiases present in AI systems used in each study. V. RECONSIDERINGTHREATSTOVALIDITY\nTheintegrationofLLMsandagenticAIintosoftwareengi- VI. CONCLUDINGREMARKS\nneeringintroducesnewthreatstovaliditythatchallengeestab- LLMs are transforming developers’ roles, reshaping arti-\nlished norms in empirical research. These threats arise from facts, and redefining empirical research. As boundaries blur\nthedynamicandnon-deterministicbehaviorofAIsystems,the betweenhumanandmachine,betweenartifactandinteraction,\nevolving nature of core software engineering constructs, and and between subject and method, the empirical software\nthe increasing reliance on AI-generated data and tools within engineering community must reassess its assumptions, adapt\nthe research process itself. its practices, and embrace new lines of inquiry. Construct validity refers to whether a study accurately\nmeasurestheconceptsitintendstoinvestigate.LLMscompli-",
+      "token_count": 495,
+      "score": 0.015625,
+      "rrf_score": 0.015625
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0029",
+      "source_id": "arxiv_2109_10971",
+      "section": "andwithreceivingfeedbackfromreviewstoprovidevaluableinsightsintothe",
+      "section_path": "andwithreceivingfeedbackfromreviewstoprovidevaluableinsightsintothe",
+      "page_start": 12,
+      "page_end": 12,
+      "char_start": 0,
+      "char_end": 96,
+      "text": "peer code review process.\n4.2 RQ1: How do research software developers perform peer code\nreview?",
+      "token_count": 23,
+      "score": 0.015625,
+      "rrf_score": 0.015625
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0040",
+      "source_id": "ijnrd_2024",
+      "section": "3.3 Measuring the Impact of AI",
+      "section_path": "3.3 Measuring the Impact of AI",
+      "page_start": 5,
+      "page_end": 6,
+      "char_start": 0,
+      "char_end": 700,
+      "text": "Identifying and replacing inefficient\nalgorithms with better alternatives. on Code Quality\nAI-powered refactoring tools such as Refact.ai,\nAI’s effectiveness in improving code quality\nIntelliCode, and Resharper analyze existing\ncan be quantified by analyzing various\nIJNRD2408436 International Journal Of Novel Research And Development (www.ijnrd.org) e386\nc386\n© 2024 IJNRD | Volume 9, Issue 8 August 2024 | ISSN: 2456-4184 | IJNRD.ORG\nperformance metrics before and after AI 3. Over Reliance on AI – Developers may\nadoption. Key performance indicators include: become overly dependent on AI-\ngenerated suggestions, reducing critical\nthinking and debugging skills.\n4. Security Concerns – AI-assisted",
+      "token_count": 169,
+      "score": 0.015384615384615385,
+      "rrf_score": 0.015384615384615385
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0046",
+      "source_id": "arxiv_2109_10971",
+      "section": "5 Discussion",
+      "section_path": "5 Discussion",
+      "page_start": 23,
+      "page_end": 24,
+      "char_start": 0,
+      "char_end": 2272,
+      "text": "In this section, we first summarize the key insights relative to each of the\nresearch questions, then discuss the implications of these results. 5.1 Answers to Research Questions\nRQ1: How do research software developers perform peer code re-\nview? Research software developers generally employ an informal peer code review\nprocess. This process identifies many types of problems ranging from typos to\nfunctionality. Participants have both positive and negative experiences with\npeer code review. Though they do not like when code authors misunderstand\ntheircriticismnorthetime-consumingnatureofthepeercodereviewprocess,\nthey do find the knowledge sharing and improved code quality to be positive\naspects of the peer code review process. RQ2: What effect does peer code review have on research software? Peer code review has an overall positive effect on research software. Partici-\npantsfoundpeercodereviewtobeveryimportantfortheirproject.However,\nthe participants did not think peer code review had much effect on reduc-\ning code complexity because sometimes complex code is necessary to increase\nperformance. Overall, it is clear that peer code review greatly improves code\nqualitybyincreasingcorrectnessandclarity,whichmakesthecodemoreread-\nable and maintainable over time. 24 NasirU.Eisty,JeffreyC.Carver\nRQ3: What difficulties do research software developers face with\npeer code review? Therearemanydifficultiesassociatedwiththepeercodereviewprocessinre-\nsearchsoftwaredevelopment.Themostcommondifficultyreportedbyrespon-\ndentsisfindingtimetoperformpeercodereviews.Anothermajorchallengeis\nunderstanding other people’s code. In addition, sometimes understanding the\nwhole system adds difficulty to the peer code review process. RQ4: What improvements to the peer code review process do re-\nsearch software developers need? There are several potential improvements to the peer code review process for\nresearchsoftware.Themostimportantimprovementisforprojectstoformalize\nthe review process by including more people, more training, and providing\ncompensation for performing peer code review. 5.2 Implications of Results\nOverall, the findings from this study are similar to the literature on peer code\nreview in traditional software engineering, as discussed in Section 2.",
+      "token_count": 476,
+      "score": 0.015384615384615385,
+      "rrf_score": 0.015384615384615385
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0041",
+      "source_id": "ijnrd_2024",
+      "section": "development tools may inadvertently",
+      "section_path": "development tools may inadvertently",
+      "page_start": 6,
+      "page_end": 6,
+      "char_start": 0,
+      "char_end": 629,
+      "text": "introduce vulnerabilities if not properly\nvalidated.\nAI-driven tools are transforming software\ndevelopment by enhancing code quality,\nimproving maintainability, and reducing\ndevelopment time. Automated code review,\nintelligent refactoring, and style enforcement\nensure that software projects remain scalable\nand error-free. However, developers must\nbalance AI assistance with human oversight to\nensure the reliability and security of AI-\ngenerated code.\nThis graph illustrates the impact of AI on\nreducing coding errors, improving efficiency,\nand enhancing maintainability.\nExpected Insights from the Graph: 4. Boosting Developer",
+      "token_count": 117,
+      "score": 0.015151515151515152,
+      "rrf_score": 0.015151515151515152
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0002",
+      "source_id": "arxiv_2109_10971",
+      "section": "Abstract Background: Research software is software developed by and/or",
+      "section_path": "Abstract Background: Research software is software developed by and/or",
+      "page_start": 1,
+      "page_end": 1,
+      "char_start": 0,
+      "char_end": 1547,
+      "text": "used by researchers, across a wide variety of domains, to perform their re-\nsearch.Becauseofthecomplexityofresearchsoftware,developerscannotcon-\nduct exhaustive testing. As a result, researchers have lower confidence in the\ncorrectness of the output of the software. Peer code review, a standard soft-\nware engineering practice, has helped address this problem in other types of\nsoftware. Aims: Peer code review is less prevalent in research software than\nit is in other types of software. In addition, the literature does not contain\nany studies about the use of peer code review in research software. Therefore,\nthrough analyzing developers perceptions, the goal of this work is to under-\nstand the current practice of peer code review in the development of research\nsoftware, identify challenges and barriers associated with peer code review in\nresearch software, and present approaches to improve the peer code review in\nresearch software. Method: We conducted interviews and a community sur-\nvey of research software developers to collect information about their current\npeer code review practices, difficulties they face, and how they address those\ndifficulties. Results: We received 84 unique responses from the interviews and\nsurveys. The results show that while research software teams review a large\namount of their code, they lack formal process, proper organization, and ad-\nequate people to perform the reviews. Conclusions: Use of peer code review\nis promising for improving the quality of research software and thereby im-\nN.U.Eisty",
+      "token_count": 303,
+      "score": 0.015151515151515152,
+      "rrf_score": 0.015151515151515152
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0064",
+      "source_id": "ijnrd_2024",
+      "section": "advancements bring significant challenges and",
+      "section_path": "advancements bring significant challenges and",
+      "page_start": 8,
+      "page_end": 9,
+      "char_start": 0,
+      "char_end": 594,
+      "text": "IJNRD2408436 International Journal Of Novel Research And Development (www.ijnrd.org) e389\nc389\n© 2024 IJNRD | Volume 9, Issue 8 August 2024 | ISSN: 2456-4184 | IJNRD.ORG\nethical concerns that must be carefully managed\nto ensure responsible AI adoption.\nKey concerns include bias in AI-generated\ncode, overreliance on AI assistance, intellectual\nproperty issues, security vulnerabilities, and\nregulatory challenges. Addressing these\nchallenges is essential to creating a sustainable\nAI-augmented development environment.\nThis graph compares AI-generated code\naccuracy against human-written code.",
+      "token_count": 142,
+      "score": 0.014925373134328358,
+      "rrf_score": 0.014925373134328358
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0051",
+      "source_id": "arxiv_2109_10971",
+      "section": "7 Conclusion and Future Work",
+      "section_path": "7 Conclusion and Future Work",
+      "page_start": 26,
+      "page_end": 26,
+      "char_start": 0,
+      "char_end": 2462,
+      "text": "In this paper, we report insights about peer code review in research software\nbased upon the responses from 84 survey and interview participants. We also\nreport the effects of the code review process on their projects, difficulties they\nface inperforming code review, andrecommendations to improve the process. Consideringthatoursurveytargetedaspecifictypeofsoftwareprojects,those\nfocused on research software, and previous experience shows that research\nsoftware projects are often less advanced in the software engineering process,\nwe were still able to attract a good number of survey respondents. Our results show the importance and usefulness of peer code review as an\nessential and important practice to help research software developers produce\nhigh-quality, trustworthy software. However, peer code review does introduce\nsome challenges related to understanding the need for it, communication mis-\nunderstandingsthatoccurduringtheprocess,necessityoftools,andavailable\ntime. In some cases peer code review may seem like an extra burden to the\ndevelopers and increase the time required for development. Though peer code\nreview presents some challenges and barriers to being established as a core\npracticeinresearchsoftwaresetting,itcanimproveresearchsoftwareinmany\nways and overcome challenges that cannot be addressed by testing or other\nsoftware quality practices. Building on the findings of this paper, our future plan is to work more\nclosely with research software projects to better understand how these results\napply in practice. By interacting directly with research software developers\nas they write software, we can conduct direct observational studies to gather\ninformation in real-time rather than relying on the type of retrospective re-\nportsthatweobtainedfromourinterviewsandsurveys.Theresultsfromthese\ndirect case studies will help to expand the findings of the interviews and sur-\nveys and provide additional useful and practical insights for research software\ndevelopers. We plan to make these results actionable by raising awareness within the\nresearch software community about the benefits and importance of peer code\nreview in their projects. The findings reported in this paper provide evidence\nthat adopting peer code review can improve the quality of research software. We have begun to to provide training on contemporary peer code review pro-\ncesstoresearchsoftwaredevelopersandplantocontinueprovidingthattrain-\ning in the future.",
+      "token_count": 470,
+      "score": 0.014925373134328358,
+      "rrf_score": 0.014925373134328358
+    },
+    {
+      "chunk_id": "ijsr_2024_chunk_0006",
+      "source_id": "ijsr_2024",
+      "section": "2. Generative AI and code quality",
+      "section_path": "2. Generative AI and code quality",
+      "page_start": 2,
+      "page_end": 3,
+      "char_start": 4676,
+      "char_end": 7303,
+      "text": "Using AI\ntools, documentation can be generated by identifying the code structure and briefly explaining the program's function,\n1953\nInternational Journal of Science and Research Archive, 2024, 13(01), 1952–1960\nclass, and method. It also adds value as it relieves developers of the task of writing documentation and, at the same time,\nguarantees that developers do not write documents that are outdated about the most current code. It is easier to\nmaintain code that has good documentation because it helps the developers to know what different segments of the\ncode do, and hence, fixing bugs and modifying the code becomes much more accessible. Maintainability, another facet of generative AI that boosts code maintainability, is learned through predictive\nfunctionality and code refactoring. AI can then analyze several code patterns in which one is most likely to make errors\nor is likely to cause errors in the future. For example, AI algorithms can identify code smells, which means some patterns\nin the code point to other more profound issues, such as if there are some complex methods or code replication. This\nway, AI helps the developers detect these problems at the initial stage and repurchase the code effectively. AI refactoring\nadvice can be to eliminate complicated code, split the procedure into more minor forms, and clean up the code\ncontaining redundant features. Increasing code clarity and code compartmentalization benefit from these changes in\nthe later maintenance and expansion phase. The benefits of creating an environment of maintainability using artificial intelligence in the long run must be\nconsidered. In general, generative AI also plays a part in preventing technical debt where a pool of code that becomes\nchallenging to maintain or extend would be built up, thereby making software projects rigid. Ideally, this decision saves\nresources that would otherwise be adhered to for future development and maintenance of such applications, thus\nenabling organizations to allocate comparable resources optimally. Furthermore, organizing a code base and having\nclean code also improves the software's capability to grow in functionality areas as and when required without having\nto rewrite the entire software. All in all, the requirements set by generative AI for coding, documentation, maintenance, and refactoring make it a great\ntool to improve code maintainability. This is understandable as software projects are becoming more sophisticated and\nthe pressure for a shorter time to market increases; AI will be required more and more to ensure consistent quality and\nmanageability of the code.",
+      "token_count": 509,
+      "score": 0.014705882352941176,
+      "rrf_score": 0.014705882352941176
+    },
+    {
+      "chunk_id": "arxiv_1710_09055_chunk_0017",
+      "source_id": "arxiv_1710_09055",
+      "section": "ICSE-SEIP’18,May27-June3,2018,GothenbuArgm,SriwtaendsehnuAgrawal,AkondRahman,RahulKrishna,AlexanderSobran*andTimMenzies",
+      "section_path": "ICSE-SEIP’18,May27-June3,2018,GothenbuArgm,SriwtaendsehnuAgrawal,AkondRahman,RahulKrishna,AlexanderSobran*andTimMenzies",
+      "page_start": 2,
+      "page_end": 2,
+      "char_start": 0,
+      "char_end": 1716,
+      "text": "• RQ2: How does team size affect the prevalence of hero • Bugreporters;\nprojects? • Bugreaders;\nAfterdividingteamsintosmall,mediumandlargesizes,we • Passiveusers.\nfoundthat:\nOftheabove,Coredeveloperscanbeprojectleadersorcoremem-\nResult2 bers.Coredevelopersarethefewcentraldeveloperswhoimple-\nAsteamsizeincreased,anincreasingproportionofprojectsbecome mentmostofthecodechangesandmakeimportantprojectdirec-\nheroprojects.ThisistrueforbothPublicandEnterpriseprojects. tiondecisions,whereastheotherperipheraldevelopersbeingthe\n“manyeyes”oftheprojectthatmakesmallchangessuchasbug\n• RQ3: Are hero projects associated with better software fixes[26,37]\nquality? Coredevelopersaresaidtocontributeroughly80%ofthecode\nWeextracted6qualitymeasures,namelynumberofissues,bugs whoarejustabout20%oftheirprojectteamsize[17,35,36,39].\nandenhancementsbeingresolved,andthetimetakentoresolve Thesecontributionscanberecordedintermsofhowmanycommits\ntheseissues,bugsandenhancements. theymadeorhowmanylinesofcode(loc)theychanged.Research\n– a:Doeshavingaheroprogrammerimprovesthenum- studies[23,31]suggestedthatmostwork/contributionsaredone\nberofissues,bugsandenhancementsbeingresolved? bylonedeveloper.Acorecommitterisalsotheonewhohaswrite\nResult3 accesstoaproject’srepository[30].Thesedevelopersarealsocalled\nForbothPublicandEnterpriseprojects,thereisnostatistical HeroProgrammers.\ndifferencebetweenthepercentofissuesandbugsbeingresolved Pintoetal.[32]studied275OSSprojectsandfoundthatabout\nwithinheroandnon-heroprojects.However,forenhancement 48%ofthedeveloperspopulationcommittedonly1.73%ofthetotal\nissues,Enterprise/Pubicheroprojectsclosedstatisticallymore/less numberofcommits(whichwearecallingperipheraldevelopers).\nissues(respectively).",
+      "token_count": 479,
+      "score": 0.014705882352941176,
+      "rrf_score": 0.014705882352941176
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0092",
+      "source_id": "ijnrd_2024",
+      "section": "interpretability will become critical",
+      "section_path": "interpretability will become critical",
+      "page_start": 12,
+      "page_end": 12,
+      "char_start": 0,
+      "char_end": 81,
+      "text": "concerns. Future AI models will include:\n✔ Explainable code suggestions – AI will",
+      "token_count": 18,
+      "score": 0.014492753623188406,
+      "rrf_score": 0.014492753623188406
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0032",
+      "source_id": "arxiv_2109_10971",
+      "section": "Acceptance of review requests",
+      "section_path": "Acceptance of review requests",
+      "page_start": 13,
+      "page_end": 14,
+      "char_start": 0,
+      "char_end": 1037,
+      "text": "14 NasirU.Eisty,JeffreyC.Carver\nFig. 6 Numberofreviewers\nThe results from Q9 (Figure 7) show which factors affect the participants\ndecisiontoacceptapeercodereviewrequest.Themostcommonfactoristhat\nthe code follows coding standards. As one respondent stated, “all changes\nneed proper style (PEP-8 compliant at minimum) and need to pass the test-\nsuite. Bug fixes just need to fix the known issue and not break any APIs, and\npotentially add relevant new tests. New features need to be fully documented\nand have tests.”\nThesecondmostcommonfactorindecidingwhethertoacceptareviewre-\nquestisdomain knowledge.Reviewerswantto“...have [domain] knowledge\nof the project, of the language, or the intended functionality.” They also want\nto know “the relevance of the review and whether or not, I am qualified to do\nthe review”. The belief that “if i am suitable for the context of the change”\nsummarizes the role of domain knowledge in the decision to accept a review\nrequest.\nOther factors that influence the decision to accept a review request were",
+      "token_count": 245,
+      "score": 0.014492753623188406,
+      "rrf_score": 0.014492753623188406
+    },
+    {
+      "chunk_id": "ijnrd_2024_chunk_0033",
+      "source_id": "ijnrd_2024",
+      "section": "Error Detection",
+      "section_path": "Error Detection",
+      "page_start": 4,
+      "page_end": 5,
+      "char_start": 0,
+      "char_end": 992,
+      "text": "development by enabling automation, reducing\nerrors, and enhancing productivity. However, AI-based tools can automatically analyze code\ndevelopers must navigate challenges related to for potential errors, security vulnerabilities, and\naccuracy, security, and ethical considerations to inefficiencies. These tools leverage machine\nensure responsible AI adoption in coding learning algorithms to identify:\npractices.\nSyntax Errors – Incorrect syntax usage\ndetected before execution.\nLogical Bugs – Common programming\nmistakes that could lead to unexpected\nbehavior.\nSecurity Vulnerabilities – Potential threats\nIJNRD2408436 International Journal Of Novel Research And Development (www.ijnrd.org) e385\nc385\n© 2024 IJNRD | Volume 9, Issue 8 August 2024 | ISSN: 2456-4184 | IJNRD.ORG\nsuch as SQL injection, buffer overflows, and code and suggest optimizations to improve\ndata leaks. execution speed and maintainability.\nExamples of AI-powered code review tools: 3.2.3 Ensuring Code Consistency and",
+      "token_count": 212,
+      "score": 0.014285714285714285,
+      "rrf_score": 0.014285714285714285
+    },
+    {
+      "chunk_id": "arxiv_2109_10971_chunk_0013",
+      "source_id": "arxiv_2109_10971",
+      "section": "2 Background",
+      "section_path": "2 Background",
+      "page_start": 5,
+      "page_end": 5,
+      "char_start": 0,
+      "char_end": 2130,
+      "text": "Because peer code review has not yet been studied in the context of research\nsoftware, this section focuses on prior research about peer code review in gen-\neral. The idea of a formal inspection first appeared in 1976 (Fagan 1976).\nAs initially developed, the process was very structured and heavyweight. Re-\nports of the use of this type of a formal inspection process showed that it\nimproved product quality, productivity, and manageability (Ackerman et al.\n1989).However,assoftwaredevelopmentbecamemoreiterativeandagile,such\na heavyweight process was seen as less relevant. Therefore, the formal inspec-\ntion process has changed into a more lightweight, peer-review process. Devel-\nopersofopen-sourceandcommercialsoftwarehaveincreasinglyemployedthis\nmorelightweightpeercodereviewaspartoftheirdevelopmentprocess(Beller\net al. 2014a; Ciolkowski et al. 2003).\nGoogle began using peer code review early in its history and evolved the\npracticeovertheyears.Itisanimportantaspectofthedevelopmentworkflow\nand has become a core part of Google culture. Because code acts as a teacher\nto future developers, Google forces people to write code that is understand-\nable to other developers. Google developers expect four key themes from peer\ncodereview:education,maintainingnorms,gatekeeping,andaccidentpreven-\ntion. Google does peer code review not only to solve problems but to ensure\nreadability and maintainability (Sadowski et al. 2018; Potvin and Levenberg\n2016).\nOpen source software projects have also found peer code review a valu-\nable method to improve software quality. Components that have higher re-\nview coverage and higher rates of participation in peer code review are likely\nto have fewer post-release defects (Morales et al. 2015). Additionally, 75% of\nthechangesresultingfrompeercodereviewrelatetoextra-functionalimprove-\nments, i.e. code quality and documentation. Only 25% relate to functionality\n(Beller et al. 2014b; Bacchelli and Bird 2013; Mantyla and Lassenius 2009).\nThatobservationindicatesthatpeercodereviewisvaluableforshorttermde-\nfect detection but more valuable in long term maintainability. Overall, poorly",
+      "token_count": 493,
+      "score": 0.014285714285714285,
+      "rrf_score": 0.014285714285714285
+    }
+  ],
+  "answer": "AI affects code review in several ways, as evidenced by the corpus:\n\n- AI can introduce complexity and homogenize certain aspects of code, which may be overlooked or simplified compared to human analysis (arxiv_2502_08108_chunk_0016, arxiv_2502_08108_chunk_0016).\n\n- AI can help in identifying and replacing inefficient algorithms with better alternatives, thus improving code quality (ijnrd_2024_chunk_0040, ijnrd_2024_chunk_0040).\n\n- AI-driven tools can enhance code quality, improve maintainability, and reduce development time by ensuring that software projects remain scalable and error-free (ijnrd_2024_chunk_0041, ijnrd_2024_chunk_0041).\n\n- AI can analyze code patterns to identify potential issues, such as code smells, and suggest refactoring to improve code clarity and maintainability (ijnrd_2024_chunk_0064, ijnrd_2024_chunk_0064).\n\n- AI can help in generating accurate and up-to-date documentation, which can improve code maintainability (ijsr_2024_chunk_0006, ijsr_2024_chunk_0006).\n\n- AI can detect syntax errors, logical bugs, and security vulnerabilities, helping to ensure code accuracy and security (ijnrd_2024_chunk_0033, ijnrd_2024_chunk_0033).\n\n- AI can be used for automated code review, which can improve the efficiency and effectiveness of the peer code review process (arxiv_2109_10971_chunk_0011, arxiv_2109_10971_chunk_0011).\n\n- AI can lead to over-reliance on automated suggestions, which may reduce critical thinking and debugging skills among developers (ijnrd_2024_chunk_0040, ijnrd_2024_chunk_0040).\n\n- AI can introduce ethical concerns such as bias in code generation, over-reliance on AI assistance, and security vulnerabilities, which must be managed to ensure responsible AI adoption (ijnrd_2024_chunk_0064, ijnrd_2024_chunk_0064).\n\n## References\n- arxiv_2502_08108\n- ijnrd_2024\n- ijsr_2024\n- arxiv_2109_10971",
+  "citations": [
+    {
+      "source_id": "arxiv_2502_08108_chunk_0016",
+      "chunk_id": "arxiv_2502_08108_chunk_0016"
+    },
+    {
+      "source_id": "ijnrd_2024_chunk_0040",
+      "chunk_id": "ijnrd_2024_chunk_0040"
+    },
+    {
+      "source_id": "ijnrd_2024_chunk_0041",
+      "chunk_id": "ijnrd_2024_chunk_0041"
+    },
+    {
+      "source_id": "ijnrd_2024_chunk_0064",
+      "chunk_id": "ijnrd_2024_chunk_0064"
+    },
+    {
+      "source_id": "ijsr_2024_chunk_0006",
+      "chunk_id": "ijsr_2024_chunk_0006"
+    },
+    {
+      "source_id": "ijnrd_2024_chunk_0033",
+      "chunk_id": "ijnrd_2024_chunk_0033"
+    },
+    {
+      "source_id": "arxiv_2109_10971_chunk_0011",
+      "chunk_id": "arxiv_2109_10971_chunk_0011"
+    }
+  ],
+  "source_metadata": {
+    "arxiv_2109_10971": {
+      "source_id": "arxiv_2109_10971",
+      "title": "Developers Perception of Peer Code Review in Research Software Development",
+      "authors": [
+        "Nasir U. Eisty",
+        "Jeffrey C. Carver"
+      ],
+      "year": 2021,
+      "type": "preprint",
+      "venue": "arXiv",
+      "link": "https://arxiv.org/abs/2109.10971",
+      "doi": null,
+      "relevance_note": "Background: Research software is software developed by and/or used by researchers, across a wide variety of domains, to perform their research. Because of the complexity of research software, develope",
+      "filename": "arxiv_2109_10971.pdf",
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2109_10971.pdf",
+      "processed_path": "data/processed/arxiv_2109_10971.json",
+      "url_or_doi": "https://arxiv.org/abs/2109.10971",
+      "tags": ""
+    },
+    "arxiv_2502_08108": {
+      "source_id": "arxiv_2502_08108",
+      "title": "Generative AI and Empirical Software Engineering: A Paradigm Shift",
+      "authors": [
+        "Christoph Treude",
+        "Margaret-Anne Storey"
+      ],
+      "year": 2025,
+      "type": "preprint",
+      "venue": "arXiv",
+      "link": "https://arxiv.org/abs/2502.08108",
+      "doi": null,
+      "relevance_note": "The adoption of large language models (LLMs) and autonomous agents in software engineering marks an enduring paradigm shift. These systems create new opportunities for tool design, workflow orchestrat",
+      "filename": "arxiv_2502_08108.pdf",
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_2502_08108.pdf",
+      "processed_path": "data/processed/arxiv_2502_08108.json",
+      "url_or_doi": "https://arxiv.org/abs/2502.08108",
+      "tags": ""
+    },
+    "ijnrd_2024": {
+      "source_id": "ijnrd_2024",
+      "title": "AI-Augmented Software Development: Enhancing Code Quality and Developer Productivity",
+      "authors": [
+        "IJNRD Author(s)"
+      ],
+      "year": 2024,
+      "type": "journal_article",
+      "venue": "International Journal of Novel Research and Development",
+      "link": "https://www.ijnrd.org/",
+      "doi": null,
+      "relevance_note": "Measures code quality and developer productivity improvements through AI augmentation.",
+      "filename": "ijnrd_2024.pd.pdf",
+      "acquisition_method": "manual",
+      "raw_path": "data/raw/ijnrd_2024.pd.pdf",
+      "processed_path": "data/processed/ijnrd_2024.json",
+      "url_or_doi": "https://www.ijnrd.org/",
+      "tags": ""
+    },
+    "arxiv_1710_09055": {
+      "source_id": "arxiv_1710_09055",
+      "title": "We Don't Need Another Hero? The Impact of \"Heroes\" on Software Development",
+      "authors": [
+        "Amritanshu Agrawal",
+        "Akond Rahman",
+        "Rahul Krishna",
+        "Alexander Sobran",
+        "Tim Menzies"
+      ],
+      "year": 2017,
+      "type": "preprint",
+      "venue": "arXiv",
+      "link": "https://arxiv.org/abs/1710.09055",
+      "doi": null,
+      "relevance_note": "A software project has \"Hero Developers\" when 80% of contributions are delivered by 20% of the developers. Are such heroes a good idea? Are too many heroes bad for software quality? Is it better to ha",
+      "filename": "arxiv_1710_09055.pdf",
+      "acquisition_method": "automated",
+      "raw_path": "data/raw/arxiv_1710_09055.pdf",
+      "processed_path": "data/processed/arxiv_1710_09055.json",
+      "url_or_doi": "https://arxiv.org/abs/1710.09055",
+      "tags": ""
+    },
+    "ijsr_2024": {
+      "source_id": "ijsr_2024",
+      "title": "Integrating Generative AI into the Software Development Lifecycle",
+      "authors": [
+        "IJSRA Author(s)"
+      ],
+      "year": 2024,
+      "type": "journal_article",
+      "venue": "International Journal of Science and Research Archive",
+      "link": "https://ijsra.net/",
+      "doi": null,
+      "relevance_note": "Examines generative-AI adoption patterns and productivity metrics in SDLC.",
+      "filename": "ijsr_2024.pdf",
+      "acquisition_method": "manual",
+      "raw_path": "data/raw/ijsr_2024.pdf",
+      "processed_path": "data/processed/ijsr_2024.json",
+      "url_or_doi": "https://ijsra.net/",
+      "tags": ""
+    }
+  }
+}

@@ -41,10 +41,10 @@ function ArtifactsPage() {
   }
 
   const handleExport = async (format) => {
-    if (!selectedThreadId) return
+    if (!selectedThreadId || !artifact) return
     setError(null)
     try {
-      await exportArtifact(artifactType, format, selectedThreadId)
+      await exportArtifact(artifactType, format, selectedThreadId, artifact)
     } catch (err) {
       setError(err.message)
     }

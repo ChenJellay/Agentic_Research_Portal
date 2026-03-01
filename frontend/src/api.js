@@ -63,12 +63,20 @@ export function exportUrl(artifactType, format, threadId) {
 }
 
 /**
- * Fetch export as blob and trigger download. Use instead of window.open to avoid
- * proxy errors with file downloads in dev (Vite proxy).
+ * Export using pre-generated artifact (POST). Avoids LLM regeneration and Metal/MLX crashes.
+ * Use when the artifact is already in memory (e.g. after clicking Generate).
  */
-export async function exportArtifact(artifactType, format, threadId) {
-  const url = exportUrl(artifactType, format, threadId);
-  const res = await fetch(url);
+export async function exportArtifact(artifactType, format, threadId, artifact) {
+  const res = await fetch(`${API_BASE}/export`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      artifact_type: artifactType,
+      format,
+      thread_id: threadId,
+      artifact,
+    }),
+  });
   if (!res.ok) throw new Error(await res.text());
   const blob = await res.blob();
   const disposition = res.headers.get('Content-Disposition');

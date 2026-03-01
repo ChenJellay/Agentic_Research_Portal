@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import Response, StreamingResponse
+from fastapi.responses import Response
+from pydantic import BaseModel
+from typing import Any, Dict
 import csv
 import io
 
@@ -7,6 +9,58 @@ from thread_store import load_thread
 from artifact_generator import generate_evidence_table, generate_annotated_bib, generate_synthesis_memo
 
 router = APIRouter(prefix="/api", tags=["export"])
+
+
+class ExportFromContentRequest(BaseModel):
+    """Request body for exporting pre-generated artifact (avoids LLM regeneration)."""
+    artifact_type: str
+    format: str
+    thread_id: str
+    artifact: Dict[str, Any]
+
+
+@router.post("/export")
+def export_from_content(req: ExportFromContentRequest):
+    """
+    Export a pre-generated artifact without calling the LLM.
+    Use this when the frontend already has the artifact (e.g. after Generate).
+    Avoids Metal/MLX crashes from rapid successive LLM calls.
+    """
+    artifact_type = req.artifact_type
+    fmt = req.format
+    thread_id = req.thread_id
+    artifact = req.artifact
+
+    if artifact_type == "evidence-table":
+        rows = artifact.get("rows", [])
+        markdown = artifact.get("markdown", "")
+        if fmt == "md":
+            return Response(content=markdown, media_type="text/markdown", headers={"Content-Disposition": f'attachment; filename="evidence_table_{thread_id[:8]}.md"'})
+        if fmt == "csv":
+            return _evidence_table_csv(rows, thread_id)
+        if fmt == "pdf":
+            return _to_pdf(markdown, f"evidence_table_{thread_id[:8]}.pdf")
+
+    if artifact_type == "annotated-bib":
+        entries = artifact.get("entries", [])
+        markdown = artifact.get("markdown", "")
+        if fmt == "md":
+            return Response(content=markdown, media_type="text/markdown", headers={"Content-Disposition": f'attachment; filename="annotated_bib_{thread_id[:8]}.md"'})
+        if fmt == "csv":
+            return _annotated_bib_csv(entries, thread_id)
+        if fmt == "pdf":
+            return _to_pdf(markdown, f"annotated_bib_{thread_id[:8]}.pdf")
+
+    if artifact_type == "synthesis-memo":
+        content = artifact.get("markdown", artifact.get("content", ""))
+        if fmt == "md":
+            return Response(content=content, media_type="text/markdown", headers={"Content-Disposition": f'attachment; filename="synthesis_memo_{thread_id[:8]}.md"'})
+        if fmt == "csv":
+            raise HTTPException(status_code=400, detail="Synthesis memo is not tabular; use MD or PDF")
+        if fmt == "pdf":
+            return _to_pdf(content, f"synthesis_memo_{thread_id[:8]}.pdf")
+
+    raise HTTPException(status_code=400, detail=f"Unknown format or artifact_type: {fmt}, {artifact_type}")
 
 
 @router.get("/export/{format}")

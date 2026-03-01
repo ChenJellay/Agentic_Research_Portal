@@ -164,3 +164,20 @@ def test_export_unknown_format(client_with_thread_and_artifacts, sample_thread):
         params={"artifact_type": "evidence-table", "thread_id": sample_thread["thread_id"]},
     )
     assert r.status_code == 400
+
+
+def test_export_post_from_content(mock_artifact_responses):
+    """POST /api/export uses pre-generated artifact without calling LLM."""
+    client = TestClient(app)
+    r = client.post(
+        "/api/export",
+        json={
+            "artifact_type": "synthesis-memo",
+            "format": "md",
+            "thread_id": "abc12345-0000-0000-0000-000000000000",
+            "artifact": mock_artifact_responses["synthesis_memo"],
+        },
+    )
+    assert r.status_code == 200
+    assert "text/markdown" in r.headers.get("content-type", "")
+    assert "Synthesis Memo" in r.text or "synthesis" in r.text.lower()

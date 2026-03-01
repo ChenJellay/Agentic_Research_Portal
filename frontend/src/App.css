@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #f0f7fc;
 }
 
 .nav {
@@ -9,19 +10,19 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.5rem;
-  background: #1a1a2e;
-  border-bottom: 1px solid #333;
+  background: #6da4cd;
+  border-bottom: 1px solid #4a8ab5;
 }
 
 .nav-brand {
   font-weight: 600;
   font-size: 1.1rem;
-  color: #e8e8e8;
+  color: #000;
   text-decoration: none;
 }
 
 .nav-brand:hover {
-  color: #fff;
+  color: #000;
 }
 
 .nav-links {
@@ -30,12 +31,12 @@
 }
 
 .nav-links a {
-  color: #a0a0a0;
+  color: #000;
   text-decoration: none;
 }
 
 .nav-links a:hover {
-  color: #fff;
+  color: #000;
 }
 
 .main {
@@ -44,11 +45,13 @@
   max-width: 900px;
   margin: 0 auto;
   width: 100%;
+  color: #000;
 }
 
 .page-title {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
+  color: #000;
 }
 
 .search-form {
@@ -61,29 +64,33 @@
   flex: 1;
   padding: 0.6rem 1rem;
   font-size: 1rem;
-  border: 1px solid #444;
+  border: 1px solid #4a8ab5;
   border-radius: 6px;
-  background: #2a2a3e;
-  color: #fff;
+  background: #6da4cd;
+  color: #000;
+}
+
+.search-form input::placeholder {
+  color: #333;
 }
 
 .search-form input:focus {
   outline: none;
-  border-color: #646cff;
+  border-color: #2d6a94;
 }
 
 .search-form button {
   padding: 0.6rem 1.2rem;
-  background: #646cff;
-  color: #fff;
-  border: none;
+  background: #6da4cd;
+  color: #000;
+  border: 1px solid #4a8ab5;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
 }
 
 .search-form button:hover {
-  background: #535bf2;
+  background: #5c93bc;
 }
 
 .search-form button:disabled {
@@ -92,13 +99,14 @@
 }
 
 .answer-box {
-  background: #1e1e2e;
-  border: 1px solid #333;
+  background: #6da4cd;
+  border: 1px solid #4a8ab5;
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
   white-space: pre-wrap;
   line-height: 1.6;
+  color: #000;
 }
 
 .sources-section {
@@ -108,11 +116,12 @@
 .sources-section h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
+  color: #000;
 }
 
 .source-card {
-  background: #1e1e2e;
-  border: 1px solid #333;
+  background: #6da4cd;
+  border: 1px solid #4a8ab5;
   border-radius: 6px;
   padding: 0.75rem;
   margin-bottom: 0.5rem;
@@ -127,7 +136,7 @@
   display: none;
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #b0b0b0;
+  color: #000;
   max-height: 200px;
   overflow-y: auto;
 }
@@ -140,20 +149,21 @@
 
 .source-id {
   font-weight: 500;
-  color: #646cff;
+  color: #000;
 }
 
 .suggested-queries {
   margin-top: 1rem;
   padding: 0.75rem;
-  background: #2a2a3e;
+  background: #6da4cd;
   border-radius: 6px;
-  border-left: 4px solid #646cff;
+  border-left: 4px solid #4a8ab5;
 }
 
 .suggested-queries h4 {
   margin: 0 0 0.5rem 0;
   font-size: 0.9rem;
+  color: #000;
 }
 
 .thread-list {
@@ -164,38 +174,47 @@
 
 .thread-item {
   padding: 1rem;
-  background: #1e1e2e;
-  border: 1px solid #333;
+  background: #6da4cd;
+  border: 1px solid #4a8ab5;
   border-radius: 6px;
   margin-bottom: 0.5rem;
   cursor: pointer;
 }
 
 .thread-item:hover {
-  border-color: #646cff;
+  border-color: #2d6a94;
 }
 
 .thread-query {
   font-weight: 500;
+  color: #000;
 }
 
 .thread-date {
   font-size: 0.85rem;
-  color: #888;
+  color: #000;
   margin-top: 0.25rem;
 }
 
 .thread-detail {
   margin-top: 1rem;
+  color: #000;
+}
+
+.thread-detail p,
+.thread-detail h3,
+.thread-detail ul,
+.thread-detail li {
+  color: #000;
 }
 
 .error {
-  color: #f87171;
+  color: #000;
   padding: 0.5rem;
 }
 
 .loading {
-  color: #a0a0a0;
+  color: #000;
 }
 
 .artifact-form {
@@ -205,10 +224,10 @@
 .artifact-form select {
   padding: 0.5rem 1rem;
   margin-right: 0.5rem;
-  background: #2a2a3e;
-  border: 1px solid #444;
+  background: #6da4cd;
+  border: 1px solid #4a8ab5;
   border-radius: 6px;
-  color: #fff;
+  color: #000;
 }
 
 .eval-metrics {
@@ -219,25 +238,26 @@
 }
 
 .eval-metric {
-  background: #1e1e2e;
+  background: #6da4cd;
   padding: 1rem;
   border-radius: 6px;
-  border: 1px solid #333;
+  border: 1px solid #4a8ab5;
 }
 
 .eval-metric .label {
   font-size: 0.85rem;
-  color: #888;
+  color: #000;
 }
 
 .eval-metric .value {
   font-size: 1.5rem;
   font-weight: 600;
+  color: #000;
 }
 
 .failure-case {
-  background: #2a1e1e;
-  border: 1px solid #443;
+  background: #6da4cd;
+  border: 1px solid #4a8ab5;
   border-radius: 6px;
   padding: 1rem;
   margin-bottom: 0.5rem;
@@ -245,4 +265,5 @@
 
 .failure-case h4 {
   margin: 0 0 0.5rem 0;
+  color: #000;
 }
